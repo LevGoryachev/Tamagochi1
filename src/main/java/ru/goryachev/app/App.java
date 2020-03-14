@@ -1,15 +1,23 @@
 package ru.goryachev.app;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
 
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
         System.out.println("run for test");
 
+        Parent root = FXMLLoader.load(getClass().getResource("/select.fxml"));
+
+        primaryStage.setTitle("Tamagochi");
+        primaryStage.setScene(new Scene(root, 800, 475));
+        primaryStage.show();
     }
 
     public static void main(String[] args) {

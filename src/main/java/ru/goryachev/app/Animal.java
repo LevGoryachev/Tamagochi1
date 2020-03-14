@@ -8,10 +8,9 @@ import javafx.util.Duration;
 
 public class Animal extends Pane {
 
-    //private final Image IMAGE = new Image(getClass().getResourceAsStream("sprites_hedgehog.png"));
     ImageView imgView;
     int count = 2;
-    int columns = 4;
+    int columns = 1;
     int offsetX = 10;
     int offsetY = 0;
     int width = 200;
