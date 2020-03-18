@@ -16,8 +16,18 @@ public class PlayController {
     @FXML
     private Button pickCat;
 
+    @FXML
+    private Button feedWApple;
+
+    @FXML
+    private Button feedWSausage;
+
+    @FXML
+    private Button playWithAnim;
+
+
 //  will use for switching to the last scene (if animal die)
-//  private SceneSwitcher switcher = new SceneSwitcher();
+    private SceneSwitcher switcher = new SceneSwitcher();
 
     private AnimalSwitcher choice = new AnimalSwitcher();
 
@@ -38,6 +48,12 @@ public class PlayController {
 
         choice.pickAnimal(1);
 
+        pickHedgehog.setVisible(false);
+        pickCat.setVisible(false);
+        feedWApple.setVisible(true);
+        feedWSausage.setVisible(true);
+        playWithAnim.setVisible(true);
+
     }
 
     @FXML
@@ -54,6 +70,39 @@ public class PlayController {
 
         choice.pickAnimal(2);
 
+        pickHedgehog.setVisible(false);
+        pickCat.setVisible(false);
+        feedWApple.setVisible(true);
+        feedWSausage.setVisible(true);
+        playWithAnim.setVisible(true);
+
     }
+
+    @FXML
+    private void apple (ActionEvent event) throws IOException {
+
+        Image image = new Image(getClass().getResourceAsStream("/meal_apple.png"));
+        ImageView imagView = new ImageView(image);
+
+        paneNode.getChildren().add(imagView);
+
+    }
+
+    @FXML
+    private void sausage (ActionEvent event) throws IOException {
+
+        Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
+        ImageView imagView = new ImageView(image);
+
+        paneNode.getChildren().add(imagView);
+
+    }
+
+    @FXML
+    private void playWith (ActionEvent event) throws IOException {
+
+
+    }
+
 
 }
