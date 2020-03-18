@@ -8,16 +8,24 @@ import javafx.scene.layout.Pane;
 
 public class PlayController {
 
-    Image image = new Image(getClass().getResourceAsStream("/sprites_cat.png"));
-    ImageView imagView = new ImageView(image);
-    Animal animal = new Animal(imagView);
+    @FXML
+    private Pane spl;
+
+   /* private Image image = new Image(getClass().getResourceAsStream("/sprites_cat.png"));
+    //AnimalSwitcher choosenx;
+    //Image imagex = choosenx.imageY;
+
+
+    private ImageView imagView = new ImageView(image);
+    private Animal animal = new Animal(imagView);
 
     @FXML
-    Pane sp;
+    private Pane sp;
 
     @FXML
     private void setAnimTest (ActionEvent event){
         sp.getChildren().add(animal);
-    }
+
+    }*/
 
 }
