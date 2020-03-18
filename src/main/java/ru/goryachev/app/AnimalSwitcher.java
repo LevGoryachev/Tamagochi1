@@ -1,8 +1,5 @@
 package ru.goryachev.app;
 
-
-import javafx.scene.image.Image;
-
 public class AnimalSwitcher {
 
     public void pickAnimal (int choice) {

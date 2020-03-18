@@ -13,7 +13,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         System.out.println("run for test");
 
-        Parent root = FXMLLoader.load(getClass().getResource("/select.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/playing.fxml"));
 
         primaryStage.setTitle("Tamagochi");
         primaryStage.setScene(new Scene(root, 800, 475));
