@@ -21,6 +21,27 @@ public class AnimalSwitcher {
 
 
             break;
+
+
+            case 3:
+
+                System.out.println("Apple selected");
+               // Animal t = (int) Animal();
+                //t.offsetX = 20;
+
+            break;
+
+
+            case 4:
+
+                System.out.println("Sausage cat selected");
+
+
+            break;
+
+
+
+
         }
 
     }
