@@ -3,6 +3,7 @@ package ru.goryachev.app;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,6 +41,7 @@ public class PlayController {
     private Pane paneNodeSausage;
 
     int mood;
+    Image img;
     ImageView imagV;
 
     //  will use for switching to the last scene (if animal die)
@@ -57,7 +59,8 @@ public class PlayController {
         Animal animal = new Animal(imagView, mood);
 
         paneNodeAnim.getChildren().add(animal);
-        this.setAnimal(imagView);
+        this.img = image;
+        this.imagV = imagView;
 
         //will use for switching to the last scene (if animal die)
         //switcher.sceneSwitch(pickHedgehog);
@@ -80,7 +83,8 @@ public class PlayController {
         Animal animal = new Animal(imagView, mood);
 
         paneNodeAnim.getChildren().add(animal);
-        this.setAnimal(imagView);
+        this.img = image;
+        this.imagV = imagView;
 
         //will use for switching to the last scene (if animal die)
         //switcher.sceneSwitch(pickCat);
@@ -107,10 +111,12 @@ public class PlayController {
 
         paneNodeApple.getChildren().add(imagView);
 
-
         choice.pickAnimal(3);
 
-
+        paneNodeAnim.getChildren().clear();
+        this.increaseMood();
+        Animal animal = new Animal(imagV, mood);
+        paneNodeAnim.getChildren().add(animal);
 
     }
 
@@ -131,41 +137,40 @@ public class PlayController {
         Animal animal = new Animal(imagV, mood);
         paneNodeAnim.getChildren().add(animal);
 
-
     }
 
     @FXML
     private void playWith (ActionEvent event) throws IOException {
         System.out.println("Play btn");
 
-        //paneNodeApple.getChildren().remove(pickCat);
-        //paneNodeApple.setVisible(false);
-        //paneNodeApple.getChildren().clear();
-
         paneNodeAnim.getChildren().clear();
-        this.decreaseMood();
-        Animal animal = new Animal(imagV, mood);
-        paneNodeAnim.getChildren().add(animal);
 
+        if (this.mood >= 440) {
+            ImageView imgDead = new ImageView(img);
+            imgDead.setViewport(new Rectangle2D(660, 0, 200, 200));
+            paneNodeAnim.getChildren().add(imgDead);
+        }
 
-    }
+        else {
+            this.decreaseMood();
+            Animal animal = new Animal(imagV, mood);
+            paneNodeAnim.getChildren().add(animal);
+        }
 
-    public void setAnimal (ImageView imagV){
-        this.imagV = imagV;
     }
 
     public void increaseMood () {
 
         if (this.mood >= 220) {
             this.mood = mood - 220;
-        } this.mood = mood;
+        }
     }
 
     public void decreaseMood () {
 
         if (this.mood <= 220) {
             this.mood = mood + 220;
-        } this.mood = mood;
+        }
     }
 
 
