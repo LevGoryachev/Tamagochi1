@@ -40,6 +40,7 @@ public class PlayController {
     @FXML
     private Pane paneNodeSausage;
 
+    int animalNumber;
     int mood;
     Image img;
     ImageView imagV;
@@ -61,6 +62,8 @@ public class PlayController {
         paneNodeAnim.getChildren().add(animal);
         this.img = image;
         this.imagV = imagView;
+
+        this.animalNumber = 1;
 
         //will use for switching to the last scene (if animal die)
         //switcher.sceneSwitch(pickHedgehog);
@@ -85,6 +88,8 @@ public class PlayController {
         paneNodeAnim.getChildren().add(animal);
         this.img = image;
         this.imagV = imagView;
+
+        this.animalNumber = 2;
 
         //will use for switching to the last scene (if animal die)
         //switcher.sceneSwitch(pickCat);
@@ -113,10 +118,12 @@ public class PlayController {
 
         choice.pickAnimal(3);
 
-        paneNodeAnim.getChildren().clear();
-        this.increaseMood();
-        Animal animal = new Animal(imagV, mood);
-        paneNodeAnim.getChildren().add(animal);
+        if (animalNumber == 1) {
+            paneNodeAnim.getChildren().clear();
+            this.increaseMood();
+            Animal animal = new Animal(imagV, mood);
+            paneNodeAnim.getChildren().add(animal);
+        }
 
     }
 
@@ -132,11 +139,12 @@ public class PlayController {
 
         choice.pickAnimal(4);
 
-        paneNodeAnim.getChildren().clear();
-        this.increaseMood();
-        Animal animal = new Animal(imagV, mood);
-        paneNodeAnim.getChildren().add(animal);
-
+        if (animalNumber == 2) {
+            paneNodeAnim.getChildren().clear();
+            this.increaseMood();
+            Animal animal = new Animal(imagV, mood);
+            paneNodeAnim.getChildren().add(animal);
+        }
     }
 
     @FXML
