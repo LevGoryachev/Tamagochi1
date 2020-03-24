@@ -22,10 +22,15 @@ public class Animal extends Pane {
         this.offsetX = ox;
         this.imgView = imgView;
         imgView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
-        animation = new SpriteAnim(imgView, Duration.millis(2000), count, columns, offsetX, offsetY, width, height);
+        animation = new SpriteAnim(imgView, Duration.millis(1000), count, columns, offsetX, offsetY, width, height);
         animation.setCycleCount(Animation.INDEFINITE);
         animation.play();
         getChildren().addAll(imgView);
+    }
+
+    public void delMeal (GameAnim gamePosition) {
+        if (this.getBoundsInParent().intersects(gamePosition.getBoundsInParent()));
+
     }
 
 
