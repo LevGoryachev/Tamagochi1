@@ -132,8 +132,6 @@ public class PlayController {
 
             paneNodeAnim.getChildren().add(animal);
 
-            Thread.sleep(3000);
-            paneNodeApple.getChildren().clear();
             this.increaseMood();
             //paneNodeApple.getChildren().clear();
 
