@@ -1,18 +1,12 @@
 package ru.goryachev.app;
 
-import javafx.animation.Animation;
-import javafx.animation.PathTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.*;
-import javafx.util.Duration;
-
 
 import java.io.IOException;
 
@@ -32,6 +26,11 @@ public class PlayController {
 
     @FXML
     private Button playWithAnim;
+
+    @FXML
+    private Button resetScene;
+
+
 
     @FXML
     private Pane paneNodeAnim;
@@ -77,6 +76,7 @@ public class PlayController {
         feedWApple.setVisible(true);
         feedWSausage.setVisible(true);
         playWithAnim.setVisible(true);
+        resetScene.setVisible(true);
 
     }
 
@@ -103,22 +103,21 @@ public class PlayController {
         feedWApple.setVisible(true);
         feedWSausage.setVisible(true);
         playWithAnim.setVisible(true);
+        resetScene.setVisible(true);
 
     }
 
     //meal
 
     @FXML
-    private void apple (ActionEvent event) throws IOException, InterruptedException {
+    private void apple (ActionEvent event) {
 
         Image image = new Image(getClass().getResourceAsStream("/meal_apple.png"));
         ImageView imagView = new ImageView(image);
         imagView.setFitHeight(75);
         imagView.setFitWidth(75);
-
+        paneNodeApple.getChildren().clear();
         paneNodeApple.getChildren().add(imagView);
-
-        choice.pickAnimal(3);
 
         if (animalNumber == 1) {
             paneNodeAnim.getChildren().clear();
@@ -126,42 +125,41 @@ public class PlayController {
             Animal animal = new Animal(imagV, mood);
 
             GameAnim gameAnim = new GameAnim();
-
             //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
-            gameAnim.moveToMeal(animal, paneNodeApple, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeApple.getLayoutX(), paneNodeApple.getLayoutY());
-
+            gameAnim.moveToMeal(animal, imagView, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeApple.getLayoutX(), paneNodeApple.getLayoutY());
             paneNodeAnim.getChildren().add(animal);
 
             this.increaseMood();
-            //paneNodeApple.getChildren().clear();
 
-            //Doesn't work
-            /*if (animal.getBoundsInParent().intersects(paneNodeApple.getBoundsInParent())) {
-                paneNodeApple.getChildren().clear();
-            }*/
         }
-
 
     }
 
     @FXML
-    private void sausage (ActionEvent event) throws IOException {
+    private void sausage (ActionEvent event) {
 
         Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
         ImageView imagView = new ImageView(image);
         imagView.setFitHeight(125);
         imagView.setFitWidth(125);
-
+        paneNodeSausage.getChildren().clear();
         paneNodeSausage.getChildren().add(imagView);
 
-        choice.pickAnimal(4);
-
         if (animalNumber == 2) {
-            paneNodeAnim.getChildren().clear();
-            this.increaseMood();
+            //paneNodeAnim.getChildren().clear();
+
             Animal animal = new Animal(imagV, mood);
+
+            GameAnim gameAnim = new GameAnim();
+            //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
+            gameAnim.moveToMeal(animal, imagView, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeSausage.getLayoutX(), paneNodeSausage.getLayoutY());
             paneNodeAnim.getChildren().add(animal);
+
+            this.increaseMood();
+
         }
+
+
     }
 
     @FXML
@@ -183,6 +181,13 @@ public class PlayController {
         }
 
     }
+
+    @FXML
+    private void resetGame (ActionEvent event) {
+
+
+    }
+
 
     public void increaseMood () {
 

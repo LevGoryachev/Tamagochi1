@@ -20,6 +20,7 @@
                <Button fx:id="feedWApple" layoutX="200.0" layoutY="2.0" mnemonicParsing="false" onAction="#apple" prefHeight="25.0" prefWidth="75.0" text="Apple" visible="false" />
                <Button fx:id="feedWSausage" layoutX="400.0" layoutY="2.0" mnemonicParsing="false" onAction="#sausage" prefHeight="25.0" prefWidth="75.0" text="Sausage" visible="false" />
                <Button fx:id="playWithAnim" layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onAction="#playWith" prefHeight="25.0" prefWidth="75.0" text="minMood" visible="false" />
+               <Button fx:id="resetScene" layoutX="50.0" layoutY="2.0" mnemonicParsing="false" onAction="#resetGame" prefHeight="25.0" prefWidth="75.0" text="reset" visible="false" />
             </children>
          </AnchorPane>
       </HBox>

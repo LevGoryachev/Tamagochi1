@@ -3,6 +3,7 @@ package ru.goryachev.app;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -18,7 +19,7 @@ import java.util.Timer;
 public class GameAnim extends Pane {
 
 
-    public void moveToMeal (Animal animal, Pane eatingMeal, double startX, double starY, double finishX, double finishY) throws InterruptedException {
+    public void moveToMeal (Animal animal, ImageView eatingMeal, double startX, double starY, double finishX, double finishY) {
 
             Path chaoticPath = new Path();
             chaoticPath.getElements().add(new MoveTo(startX - 200,starY));

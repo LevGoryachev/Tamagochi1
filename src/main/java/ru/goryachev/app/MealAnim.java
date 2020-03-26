@@ -2,12 +2,13 @@ package ru.goryachev.app;
 
 
 import javafx.animation.FadeTransition;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class MealAnim {
 
-    public void clearMeal(Pane meal) {
+    public void clearMeal(ImageView meal) {
 
             FadeTransition removeMeal = new FadeTransition();
             removeMeal.setDuration(Duration.millis(50));
