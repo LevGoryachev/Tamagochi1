@@ -46,10 +46,9 @@ public class PlayController {
     Image img;
     ImageView imagV;
 
-    //  will use for switching to the last scene (if animal die)
-    private SceneSwitcher switcher = new SceneSwitcher();
-
     private AnimalSwitcher choice = new AnimalSwitcher();
+
+    private SceneSwitcher switcher = new SceneSwitcher();
 
     //animals
 
@@ -156,12 +155,12 @@ public class PlayController {
             paneNodeAnim.getChildren().add(animal);
 
             this.increaseMood();
-
         }
-
 
     }
 
+
+    // Buttons for checking
     @FXML
     private void playWith (ActionEvent event) throws IOException {
         System.out.println("Play btn");
@@ -183,8 +182,9 @@ public class PlayController {
     }
 
     @FXML
-    private void resetGame (ActionEvent event) {
+    private void resetGame (ActionEvent event) throws IOException {
 
+        switcher.sceneSwitch(resetScene);
 
     }
 
@@ -202,9 +202,6 @@ public class PlayController {
             this.mood = mood + 220;
         }
     }
-
-
-
 
 
 }
