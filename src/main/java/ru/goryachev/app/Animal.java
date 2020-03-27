@@ -15,7 +15,6 @@ public class Animal extends Pane {
     int offsetY = 0;
     int width = 200;
     int height = 200;
-    int score = 0;
     SpriteAnim animation;
 
     public Animal (ImageView imgView, int ox) {
@@ -27,12 +26,5 @@ public class Animal extends Pane {
         animation.play();
         getChildren().addAll(imgView);
     }
-
-    public void delMeal (GameAnim gamePosition) {
-        if (this.getBoundsInParent().intersects(gamePosition.getBoundsInParent()));
-
-    }
-
-
 
 }
