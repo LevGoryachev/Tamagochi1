@@ -1,5 +1,6 @@
 package ru.goryachev.app;
 
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
@@ -31,7 +32,6 @@ public class PlayController {
     private Button resetScene;
 
 
-
     @FXML
     private Pane paneNodeAnim;
 
@@ -44,6 +44,7 @@ public class PlayController {
     int animalNumber;
     int mood;
     long timeEat;
+    long expireT;
     Image img;
     ImageView imagV;
 
@@ -54,7 +55,7 @@ public class PlayController {
     //animals
 
     @FXML
-    private void startHedgehog (ActionEvent event) throws IOException {
+    private void startHedgehog(ActionEvent event) throws IOException {
 
         Image image = new Image(getClass().getResourceAsStream("/sprites_hedgehog.png"));
         ImageView imagView = new ImageView(image);
@@ -81,7 +82,7 @@ public class PlayController {
     }
 
     @FXML
-    private void startCat (ActionEvent event) throws IOException {
+    private void startCat(ActionEvent event) throws IOException {
 
         Image image = new Image(getClass().getResourceAsStream("/sprites_cat.png"));
         ImageView imagView = new ImageView(image);
@@ -110,63 +111,69 @@ public class PlayController {
     //meal
 
     @FXML
-    private void apple (ActionEvent event) {
+    private void apple(ActionEvent event) {
 
-        if (timeEat <= System.currentTimeMillis()) {
-
-            this.timeEat =  System.currentTimeMillis() + 5500;
-
-            Image image = new Image(getClass().getResourceAsStream("/meal_apple.png"));
-            ImageView imagView = new ImageView(image);
-            imagView.setFitHeight(75);
-            imagView.setFitWidth(75);
-            paneNodeApple.getChildren().clear();
-            paneNodeApple.getChildren().add(imagView);
-
-            if (animalNumber == 1 && this.mood <= 440) {
-                //paneNodeAnim.getChildren().clear();
-                Animal animal = new Animal(imagV, mood);
-                GameAnim gameAnim = new GameAnim();
-                //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
-                gameAnim.moveToMeal(animal, imagView, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeApple.getLayoutX(), paneNodeApple.getLayoutY());
-                paneNodeAnim.getChildren().add(animal);
-
-                this.increaseMood();
-            }
-        }
-    }
-
-    @FXML
-    private void sausage (ActionEvent event) {
-
+        Image image = new Image(getClass().getResourceAsStream("/meal_apple.png"));
+        ImageView imagView = new ImageView(image);
+        imagView.setFitHeight(75);
+        imagView.setFitWidth(75);
+        paneNodeApple.getChildren().clear();
+        paneNodeApple.getChildren().add(imagView);
         if (timeEat <= System.currentTimeMillis()) {
 
             this.timeEat = System.currentTimeMillis() + 5500;
 
-            Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
-            ImageView imagView = new ImageView(image);
-            imagView.setFitHeight(125);
-            imagView.setFitWidth(125);
-            paneNodeSausage.getChildren().clear();
-            paneNodeSausage.getChildren().add(imagView);
-
-            if (animalNumber == 2 && this.mood <= 440) {
+            if (animalNumber == 1 && this.mood <= 440) {
                 //paneNodeAnim.getChildren().clear();
                 Animal animal = new Animal(imagV, mood);
-                GameAnim gameAnim = new GameAnim();
-                //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
-                gameAnim.moveToMeal(animal, imagView, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeSausage.getLayoutX(), paneNodeSausage.getLayoutY());
+                    GameAnim gameAnim = new GameAnim();
+                    //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
+                    gameAnim.moveToMeal(animal, paneNodeApple, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeApple.getLayoutX(), paneNodeApple.getLayoutY());
                 paneNodeAnim.getChildren().add(animal);
 
                 this.increaseMood();
             }
+
         }
+        MealAnim expiredMeal = new MealAnim();
+        expiredMeal.fadeMeal(imagView);
+    }
+
+    @FXML
+    private void sausage(ActionEvent event) {
+
+
+        Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
+        ImageView imagView = new ImageView(image);
+        imagView.setFitHeight(125);
+        imagView.setFitWidth(125);
+        paneNodeSausage.getChildren().clear();
+        paneNodeSausage.getChildren().add(imagView);
+        if (timeEat <= System.currentTimeMillis()) {
+
+            this.timeEat = System.currentTimeMillis() + 5500;
+            if (animalNumber == 2 && this.mood <= 440) {
+                //paneNodeAnim.getChildren().clear();
+                Animal animal = new Animal(imagV, mood);
+                    GameAnim gameAnim = new GameAnim();
+                    //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
+                    gameAnim.moveToMeal(animal, paneNodeSausage, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeSausage.getLayoutX(), paneNodeSausage.getLayoutY());
+                paneNodeAnim.getChildren().add(animal);
+
+                this.increaseMood();
+            }
+
+
+        }
+        MealAnim expiredMeal = new MealAnim();
+        expiredMeal.fadeMeal(imagView);
+
     }
 
 
     // Buttons for checking
     @FXML
-    private void playWith (ActionEvent event) throws IOException {
+    private void playWith(ActionEvent event) throws IOException {
         System.out.println("Play btn");
 
         paneNodeAnim.getChildren().clear();
@@ -180,9 +187,7 @@ public class PlayController {
             ImageView imgDead = new ImageView(img);
             imgDead.setViewport(new Rectangle2D(660, 0, 200, 200));
             paneNodeAnim.getChildren().add(imgDead);
-        }
-
-        else {
+        } else {
             this.decreaseMood();
             Animal animal = new Animal(imagV, mood);
             paneNodeAnim.getChildren().add(animal);
@@ -191,21 +196,21 @@ public class PlayController {
     }
 
     @FXML
-    private void resetGame (ActionEvent event) throws IOException {
+    private void resetGame(ActionEvent event) throws IOException {
 
         switcher.sceneSwitch(resetScene);
 
     }
 
 
-    public void increaseMood () {
+    public void increaseMood() {
 
         if (this.mood >= 220) {
             this.mood = mood - 220;
         }
     }
 
-    public void decreaseMood () {
+    public void decreaseMood() {
 
         if (this.mood <= 440) {
             this.mood = mood + 220;
