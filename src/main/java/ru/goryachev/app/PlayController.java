@@ -118,7 +118,7 @@ public class PlayController {
         paneNodeApple.getChildren().clear();
         paneNodeApple.getChildren().add(imagView);
 
-        if (animalNumber == 1) {
+        if (animalNumber == 1 && this.mood <= 440) {
             paneNodeAnim.getChildren().clear();
 
             Animal animal = new Animal(imagV, mood);
@@ -144,7 +144,7 @@ public class PlayController {
         paneNodeSausage.getChildren().clear();
         paneNodeSausage.getChildren().add(imagView);
 
-        if (animalNumber == 2) {
+        if (animalNumber == 2 && this.mood <= 440) {
             //paneNodeAnim.getChildren().clear();
 
             Animal animal = new Animal(imagV, mood);
@@ -167,7 +167,12 @@ public class PlayController {
 
         paneNodeAnim.getChildren().clear();
 
+        if (this.mood >= 660) {
+            switcher.sceneSwitch(resetScene);
+        }
+
         if (this.mood >= 440) {
+            this.decreaseMood();
             ImageView imgDead = new ImageView(img);
             imgDead.setViewport(new Rectangle2D(660, 0, 200, 200));
             paneNodeAnim.getChildren().add(imgDead);
@@ -198,7 +203,7 @@ public class PlayController {
 
     public void decreaseMood () {
 
-        if (this.mood <= 220) {
+        if (this.mood <= 440) {
             this.mood = mood + 220;
         }
     }

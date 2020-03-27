@@ -3,7 +3,6 @@ package ru.goryachev.app;
 
 import javafx.animation.FadeTransition;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class MealAnim {
