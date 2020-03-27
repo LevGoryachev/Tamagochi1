@@ -43,6 +43,7 @@ public class PlayController {
 
     int animalNumber;
     int mood;
+    long timeEat;
     Image img;
     ImageView imagV;
 
@@ -111,52 +112,55 @@ public class PlayController {
     @FXML
     private void apple (ActionEvent event) {
 
-        Image image = new Image(getClass().getResourceAsStream("/meal_apple.png"));
-        ImageView imagView = new ImageView(image);
-        imagView.setFitHeight(75);
-        imagView.setFitWidth(75);
-        paneNodeApple.getChildren().clear();
-        paneNodeApple.getChildren().add(imagView);
+        if (timeEat <= System.currentTimeMillis()) {
 
-        if (animalNumber == 1 && this.mood <= 440) {
-            paneNodeAnim.getChildren().clear();
+            this.timeEat =  System.currentTimeMillis() + 5500;
 
-            Animal animal = new Animal(imagV, mood);
+            Image image = new Image(getClass().getResourceAsStream("/meal_apple.png"));
+            ImageView imagView = new ImageView(image);
+            imagView.setFitHeight(75);
+            imagView.setFitWidth(75);
+            paneNodeApple.getChildren().clear();
+            paneNodeApple.getChildren().add(imagView);
 
-            GameAnim gameAnim = new GameAnim();
-            //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
-            gameAnim.moveToMeal(animal, imagView, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeApple.getLayoutX(), paneNodeApple.getLayoutY());
-            paneNodeAnim.getChildren().add(animal);
+            if (animalNumber == 1 && this.mood <= 440) {
+                //paneNodeAnim.getChildren().clear();
+                Animal animal = new Animal(imagV, mood);
+                GameAnim gameAnim = new GameAnim();
+                //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
+                gameAnim.moveToMeal(animal, imagView, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeApple.getLayoutX(), paneNodeApple.getLayoutY());
+                paneNodeAnim.getChildren().add(animal);
 
-            this.increaseMood();
-
+                this.increaseMood();
+            }
         }
-
     }
 
     @FXML
     private void sausage (ActionEvent event) {
 
-        Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
-        ImageView imagView = new ImageView(image);
-        imagView.setFitHeight(125);
-        imagView.setFitWidth(125);
-        paneNodeSausage.getChildren().clear();
-        paneNodeSausage.getChildren().add(imagView);
+        if (timeEat <= System.currentTimeMillis()) {
 
-        if (animalNumber == 2 && this.mood <= 440) {
-            //paneNodeAnim.getChildren().clear();
+            this.timeEat = System.currentTimeMillis() + 5500;
 
-            Animal animal = new Animal(imagV, mood);
+            Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
+            ImageView imagView = new ImageView(image);
+            imagView.setFitHeight(125);
+            imagView.setFitWidth(125);
+            paneNodeSausage.getChildren().clear();
+            paneNodeSausage.getChildren().add(imagView);
 
-            GameAnim gameAnim = new GameAnim();
-            //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
-            gameAnim.moveToMeal(animal, imagView, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeSausage.getLayoutX(), paneNodeSausage.getLayoutY());
-            paneNodeAnim.getChildren().add(animal);
+            if (animalNumber == 2 && this.mood <= 440) {
+                //paneNodeAnim.getChildren().clear();
+                Animal animal = new Animal(imagV, mood);
+                GameAnim gameAnim = new GameAnim();
+                //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
+                gameAnim.moveToMeal(animal, imagView, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeSausage.getLayoutX(), paneNodeSausage.getLayoutY());
+                paneNodeAnim.getChildren().add(animal);
 
-            this.increaseMood();
+                this.increaseMood();
+            }
         }
-
     }
 
 
