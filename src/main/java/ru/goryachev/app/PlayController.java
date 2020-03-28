@@ -1,9 +1,7 @@
 package ru.goryachev.app;
 
-import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,23 +48,20 @@ public class PlayController {
     private SceneSwitcher switcher = new SceneSwitcher();
 
 
-
     //animals
 
     @FXML
-    private void startHedgehog(ActionEvent event) throws IOException {
+    private void startHedgehog(ActionEvent event) {
 
         Image image = new Image(getClass().getResourceAsStream("/sprites_hedgehog.png"));
         ImageView imagView = new ImageView(image);
         Animal animal = new Animal(imagView, mood);
-
         paneNodeAnim.getChildren().add(animal);
         this.img = image;
         this.imagV = imagView;
-
         this.animalNumber = 1;
 
-        choice.pickAnimal(1);
+        //choice.pickAnimal(1);
 
         pickHedgehog.setVisible(false);
         pickCat.setVisible(false);
@@ -82,7 +77,7 @@ public class PlayController {
     }
 
     @FXML
-    private void startCat(ActionEvent event) throws IOException {
+    private void startCat(ActionEvent event) {
 
         Image image = new Image(getClass().getResourceAsStream("/sprites_cat.png"));
         ImageView imagView = new ImageView(image);
@@ -94,7 +89,7 @@ public class PlayController {
 
         this.animalNumber = 2;
 
-        choice.pickAnimal(2);
+        //choice.pickAnimal(2);
 
         pickHedgehog.setVisible(false);
         pickCat.setVisible(false);
@@ -152,28 +147,6 @@ public class PlayController {
 
 
     // Buttons for checking
-    @FXML
-    private void playWith(ActionEvent event) throws IOException {
-        System.out.println("Play btn");
-
-        paneNodeAnim.getChildren().clear();
-
-        if (this.mood >= 660) {
-            switcher.sceneSwitch(resetScene);
-        }
-
-        if (this.mood >= 440) {
-            this.decreaseMood();
-            ImageView imgDead = new ImageView(img);
-            imgDead.setViewport(new Rectangle2D(660, 0, 200, 200));
-            paneNodeAnim.getChildren().add(imgDead);
-        } else {
-            this.decreaseMood();
-            Animal animal = new Animal(imagV, mood);
-            paneNodeAnim.getChildren().add(animal);
-        }
-
-    }
 
     @FXML
     private void resetGame(ActionEvent event) throws IOException {
@@ -181,21 +154,5 @@ public class PlayController {
         switcher.sceneSwitch(resetScene);
 
     }
-
-
-    public void increaseMood() {
-
-        if (this.mood >= 220) {
-            this.mood = mood - 220;
-        }
-    }
-
-    public void decreaseMood() {
-
-        if (this.mood <= 440) {
-            this.mood = mood + 220;
-        }
-    }
-
 
 }

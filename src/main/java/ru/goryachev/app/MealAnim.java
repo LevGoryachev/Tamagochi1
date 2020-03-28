@@ -1,6 +1,5 @@
 package ru.goryachev.app;
 
-
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.scene.image.ImageView;

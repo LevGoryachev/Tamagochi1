@@ -1,7 +1,6 @@
 package ru.goryachev.app;
 
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
