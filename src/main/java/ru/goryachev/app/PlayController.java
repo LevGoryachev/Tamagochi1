@@ -26,9 +26,6 @@ public class PlayController {
     private Button feedWSausage;
 
     @FXML
-    private Button playWithAnim;
-
-    @FXML
     private Button resetScene;
 
 
@@ -44,13 +41,15 @@ public class PlayController {
     int animalNumber;
     int mood;
     long timeEat;
-    long expireT;
     Image img;
     ImageView imagV;
+    MoodReg moodAdjuster;
 
     private AnimalSwitcher choice = new AnimalSwitcher();
 
     private SceneSwitcher switcher = new SceneSwitcher();
+
+
 
     //animals
 
@@ -67,20 +66,18 @@ public class PlayController {
 
         this.animalNumber = 1;
 
-        //will use for switching to the last scene (if animal die)
-        //switcher.sceneSwitch(pickHedgehog);
-
         choice.pickAnimal(1);
 
         pickHedgehog.setVisible(false);
         pickCat.setVisible(false);
         feedWApple.setVisible(true);
         feedWSausage.setVisible(true);
-        playWithAnim.setVisible(true);
         resetScene.setVisible(true);
 
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, mood, img, imagV, resetScene);
         timeReg.decrTimeByTime();
+        this.moodAdjuster =  timeReg;
+
 
     }
 
@@ -97,20 +94,17 @@ public class PlayController {
 
         this.animalNumber = 2;
 
-        //will use for switching to the last scene (if animal die)
-        //switcher.sceneSwitch(pickCat);
-
         choice.pickAnimal(2);
 
         pickHedgehog.setVisible(false);
         pickCat.setVisible(false);
         feedWApple.setVisible(true);
         feedWSausage.setVisible(true);
-        playWithAnim.setVisible(true);
         resetScene.setVisible(true);
 
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, mood, img, imagV, resetScene);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, mood, img, imagV, resetScene);
         timeReg.decrTimeByTime();
+        this.moodAdjuster =  timeReg;
 
     }
 
@@ -126,22 +120,11 @@ public class PlayController {
         paneNodeApple.getChildren().clear();
         paneNodeApple.getChildren().add(imagView);
         if (timeEat <= System.currentTimeMillis()) {
-
-            this.timeEat = System.currentTimeMillis() + 5500;
+            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
 
             if (animalNumber == 1) {
-                //paneNodeAnim.getChildren().clear();
-                /*Animal animal = new Animal(imagV, mood);
-                    GameAnim gameAnim = new GameAnim();
-                    //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
-                    gameAnim.moveToMeal(animal, paneNodeApple, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeApple.getLayoutX(), paneNodeApple.getLayoutY());
-                paneNodeAnim.getChildren().add(animal);
-
-                this.increaseMood();*/
-                MoodReg mealReg = new MoodReg(paneNodeAnim, paneNodeApple, mood, img, imagV, resetScene);
-                mealReg.increaser();
+                this.moodAdjuster.increaser();
             }
-
         }
         MealAnim expiredMeal = new MealAnim();
         expiredMeal.fadeMeal(imagView);
@@ -150,7 +133,6 @@ public class PlayController {
     @FXML
     private void sausage(ActionEvent event) {
 
-
         Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
         ImageView imagView = new ImageView(image);
         imagView.setFitHeight(125);
@@ -158,24 +140,14 @@ public class PlayController {
         paneNodeSausage.getChildren().clear();
         paneNodeSausage.getChildren().add(imagView);
         if (timeEat <= System.currentTimeMillis()) {
+            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
 
-            this.timeEat = System.currentTimeMillis() + 5500;
-            if (animalNumber == 2 && this.mood <= 440) {
-                //paneNodeAnim.getChildren().clear();
-                Animal animal = new Animal(imagV, mood);
-                    GameAnim gameAnim = new GameAnim();
-                    //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
-                    gameAnim.moveToMeal(animal, paneNodeSausage, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeSausage.getLayoutX(), paneNodeSausage.getLayoutY());
-                paneNodeAnim.getChildren().add(animal);
-
-                this.increaseMood();
+            if (animalNumber == 2) {
+                this.moodAdjuster.increaser();
             }
-
-
         }
         MealAnim expiredMeal = new MealAnim();
         expiredMeal.fadeMeal(imagView);
-
     }
 
 

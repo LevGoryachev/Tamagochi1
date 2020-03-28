@@ -31,18 +31,18 @@ public class MoodReg {
 
     }
 
-
     public void increaser() {
 
         if (this.mood <= 440) {
+            this.increaseMood();
             paneNodeAnim.getChildren().clear();
             Animal animal = new Animal(imagV, mood);
             GameAnim gameAnim = new GameAnim();
             //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
             gameAnim.moveToMeal(animal, paneMeal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneMeal.getLayoutX(), paneMeal.getLayoutY());
             paneNodeAnim.getChildren().add(animal);
+            System.out.println("increaser() works succefully");
 
-            this.increaseMood();
         }
     }
 
@@ -78,12 +78,11 @@ public class MoodReg {
 
                 try {
                     decreaser();
-                    expireTime = System.currentTimeMillis() + 5000;
-                    System.out.println("Decreaser works succefully");
+                    expireTime = System.currentTimeMillis() + 15000;
+                    System.out.println("decreaser() works succefully");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                //this.stop();
             }
         }
     };
@@ -91,6 +90,7 @@ public class MoodReg {
     public void decrTimeByTime () {
 
         timer.start();
+
     }
 
 
