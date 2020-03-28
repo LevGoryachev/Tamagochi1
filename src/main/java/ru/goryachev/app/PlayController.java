@@ -79,6 +79,9 @@ public class PlayController {
         playWithAnim.setVisible(true);
         resetScene.setVisible(true);
 
+        MoodReg timeReg = new MoodReg(paneNodeAnim, mood, img, imagV, resetScene);
+        timeReg.decrTimeByTime();
+
     }
 
     @FXML
@@ -105,6 +108,9 @@ public class PlayController {
         feedWSausage.setVisible(true);
         playWithAnim.setVisible(true);
         resetScene.setVisible(true);
+
+        MoodReg timeReg = new MoodReg(paneNodeAnim, mood, img, imagV, resetScene);
+        timeReg.decrTimeByTime();
 
     }
 
