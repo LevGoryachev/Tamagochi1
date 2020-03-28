@@ -79,7 +79,7 @@ public class PlayController {
         playWithAnim.setVisible(true);
         resetScene.setVisible(true);
 
-        MoodReg timeReg = new MoodReg(paneNodeAnim, mood, img, imagV, resetScene);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, mood, img, imagV, resetScene);
         timeReg.decrTimeByTime();
 
     }
@@ -109,7 +109,7 @@ public class PlayController {
         playWithAnim.setVisible(true);
         resetScene.setVisible(true);
 
-        MoodReg timeReg = new MoodReg(paneNodeAnim, mood, img, imagV, resetScene);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, mood, img, imagV, resetScene);
         timeReg.decrTimeByTime();
 
     }
@@ -129,15 +129,17 @@ public class PlayController {
 
             this.timeEat = System.currentTimeMillis() + 5500;
 
-            if (animalNumber == 1 && this.mood <= 440) {
+            if (animalNumber == 1) {
                 //paneNodeAnim.getChildren().clear();
-                Animal animal = new Animal(imagV, mood);
+                /*Animal animal = new Animal(imagV, mood);
                     GameAnim gameAnim = new GameAnim();
                     //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
                     gameAnim.moveToMeal(animal, paneNodeApple, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneNodeApple.getLayoutX(), paneNodeApple.getLayoutY());
                 paneNodeAnim.getChildren().add(animal);
 
-                this.increaseMood();
+                this.increaseMood();*/
+                MoodReg mealReg = new MoodReg(paneNodeAnim, paneNodeApple, mood, img, imagV, resetScene);
+                mealReg.increaser();
             }
 
         }
