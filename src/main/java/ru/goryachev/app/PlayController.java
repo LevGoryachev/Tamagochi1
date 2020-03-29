@@ -45,7 +45,7 @@ public class PlayController {
 
     private AnimalSwitcher choice = new AnimalSwitcher();
 
-    private SceneSwitcher switcher = new SceneSwitcher();
+    private SceneSwitcher scSwitcher = new SceneSwitcher();
 
 
     //animals
@@ -61,18 +61,11 @@ public class PlayController {
         this.imagV = imagView;
         this.animalNumber = 1;
 
-        //choice.pickAnimal(1);
+        scSwitcher.sceneSwitch(pickHedgehog, pickCat, feedWApple, feedWSausage, resetScene);
 
-        pickHedgehog.setVisible(false);
-        pickCat.setVisible(false);
-        feedWApple.setVisible(true);
-        feedWSausage.setVisible(true);
-        resetScene.setVisible(true);
-
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, mood, img, imagV, resetScene);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, mood, img, imagV, resetScene);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
-
 
     }
 
@@ -86,18 +79,11 @@ public class PlayController {
         paneNodeAnim.getChildren().add(animal);
         this.img = image;
         this.imagV = imagView;
-
         this.animalNumber = 2;
 
-        //choice.pickAnimal(2);
+        scSwitcher.sceneSwitch(pickHedgehog, pickCat, feedWApple, feedWSausage, resetScene);
 
-        pickHedgehog.setVisible(false);
-        pickCat.setVisible(false);
-        feedWApple.setVisible(true);
-        feedWSausage.setVisible(true);
-        resetScene.setVisible(true);
-
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, mood, img, imagV, resetScene);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, mood, img, imagV, resetScene);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
 
@@ -151,7 +137,7 @@ public class PlayController {
     @FXML
     private void resetGame(ActionEvent event) throws IOException {
 
-        switcher.sceneSwitch(resetScene);
+        scSwitcher.sceneReset(resetScene);
 
     }
 

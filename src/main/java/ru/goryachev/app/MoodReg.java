@@ -18,15 +18,16 @@ public class MoodReg {
     Image img;
     ImageView imagV;
     Button resetBtn;
-    private SceneSwitcher switcher = new SceneSwitcher();
+    SceneSwitcher scSwitcher;
 
-    public MoodReg(Pane paneNodeAnim, Pane paneMeal, int mood, Image img, ImageView imagV, Button resetBtn) {
+    public MoodReg(Pane paneNodeAnim, Pane paneMeal, SceneSwitcher switcher, int mood, Image img, ImageView imagV, Button resetBtn) {
         this.paneNodeAnim = paneNodeAnim;
         this.paneMeal = paneMeal;
         this.mood = mood;
         this.img = img;
         this.imagV = imagV;
         this.resetBtn = resetBtn;
+        this.scSwitcher = switcher;
 
     }
 
@@ -50,7 +51,7 @@ public class MoodReg {
         paneNodeAnim.getChildren().clear();
 
         if (this.mood >= 660) {
-            switcher.sceneSwitch(resetBtn);
+            scSwitcher.sceneReset(resetBtn);
             timer.stop();
         }
 
@@ -67,17 +68,17 @@ public class MoodReg {
 
     }
 
-    long expireTime = System.currentTimeMillis() + 5000;
+    long changeMoment = System.currentTimeMillis() + 5000;
 
     AnimationTimer timer = new AnimationTimer() {
 
         @Override
         public void handle(long l) {
-            if (expireTime <= System.currentTimeMillis()) {
+            if (changeMoment <= System.currentTimeMillis()) {
 
                 try {
                     decreaser();
-                    expireTime = System.currentTimeMillis() + 15000;
+                    changeMoment = System.currentTimeMillis() + 15000;
                     System.out.println("decreaser() works succefully");
                 } catch (IOException e) {
                     e.printStackTrace();

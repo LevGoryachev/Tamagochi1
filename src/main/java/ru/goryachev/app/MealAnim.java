@@ -21,13 +21,13 @@ public class MealAnim {
 
     public void removeMeal(Pane meal) {
 
-        long expireTime = System.currentTimeMillis() + 2000;
+        long expiredTime = System.currentTimeMillis() + 2000;
 
         AnimationTimer timer = new AnimationTimer() {
 
             @Override
             public void handle(long l) {
-                if (expireTime <= System.currentTimeMillis()) {
+                if (expiredTime <= System.currentTimeMillis()) {
                     meal.getChildren().clear();
                     this.stop();
                 }

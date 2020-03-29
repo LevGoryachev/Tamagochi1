@@ -10,7 +10,17 @@ import java.io.IOException;
 
 public class SceneSwitcher {
 
-    public void sceneSwitch (Button resetClose) throws IOException {
+    public void sceneSwitch (Button pickHedgehog, Button pickCat, Button feedWApple, Button feedWSausage, Button res) {
+
+        pickHedgehog.setVisible(false);
+        pickCat.setVisible(false);
+        feedWApple.setVisible(true);
+        feedWSausage.setVisible(true);
+        res.setVisible(true);
+
+    }
+
+    public void sceneReset (Button resetClose) throws IOException {
 
         //close old window
         Stage primaryStage = (Stage) resetClose.getScene().getWindow();
