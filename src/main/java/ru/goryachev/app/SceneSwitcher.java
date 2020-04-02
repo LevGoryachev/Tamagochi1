@@ -16,7 +16,7 @@ public class SceneSwitcher {
         pickCat.setVisible(false);
         feedWApple.setVisible(true);
         feedWSausage.setVisible(true);
-        res.setVisible(true);
+        //res.setVisible(true);
 
     }
 

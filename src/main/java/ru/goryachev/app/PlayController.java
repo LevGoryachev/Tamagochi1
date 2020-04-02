@@ -24,7 +24,7 @@ public class PlayController {
     private Button feedWSausage;
 
     @FXML
-    private Button resetScene;
+    private Button resetBtn;
 
 
     @FXML
@@ -43,10 +43,7 @@ public class PlayController {
     ImageView imagV;
     MoodReg moodAdjuster;
 
-    private AnimalSwitcher choice = new AnimalSwitcher();
-
     private SceneSwitcher scSwitcher = new SceneSwitcher();
-
 
     //animals
 
@@ -61,9 +58,9 @@ public class PlayController {
         this.imagV = imagView;
         this.animalNumber = 1;
 
-        scSwitcher.sceneSwitch(pickHedgehog, pickCat, feedWApple, feedWSausage, resetScene);
+        scSwitcher.sceneSwitch(pickHedgehog, pickCat, feedWApple, feedWSausage, resetBtn);
 
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, mood, img, imagV, resetScene);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, mood, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
 
@@ -81,9 +78,9 @@ public class PlayController {
         this.imagV = imagView;
         this.animalNumber = 2;
 
-        scSwitcher.sceneSwitch(pickHedgehog, pickCat, feedWApple, feedWSausage, resetScene);
+        scSwitcher.sceneSwitch(pickHedgehog, pickCat, feedWApple, feedWSausage, resetBtn);
 
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, mood, img, imagV, resetScene);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, mood, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
 
@@ -136,8 +133,8 @@ public class PlayController {
 
     @FXML
     private void resetGame(ActionEvent event) throws IOException {
-
-        scSwitcher.sceneReset(resetScene);
+        SceneSwitcher scSwitcher = new SceneSwitcher();
+        scSwitcher.sceneReset(resetBtn);
 
     }
 
