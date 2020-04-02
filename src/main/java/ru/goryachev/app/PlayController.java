@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 
@@ -26,6 +26,8 @@ public class PlayController {
     @FXML
     private Button resetBtn;
 
+    @FXML
+    private VBox mainScene;
 
     @FXML
     private Pane paneNodeAnim;
@@ -35,6 +37,7 @@ public class PlayController {
 
     @FXML
     private Pane paneNodeSausage;
+
 
     int animalNumber;
     int mood;
@@ -54,11 +57,12 @@ public class PlayController {
         ImageView imagView = new ImageView(image);
         Animal animal = new Animal(imagView, mood);
         paneNodeAnim.getChildren().add(animal);
+
         this.img = image;
         this.imagV = imagView;
         this.animalNumber = 1;
 
-        scSwitcher.sceneSwitch(pickHedgehog, pickCat, feedWApple, feedWSausage, resetBtn);
+        scSwitcher.sceneSwitch(mainScene, pickHedgehog, pickCat, feedWApple, feedWSausage, resetBtn);
 
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, mood, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
@@ -78,7 +82,7 @@ public class PlayController {
         this.imagV = imagView;
         this.animalNumber = 2;
 
-        scSwitcher.sceneSwitch(pickHedgehog, pickCat, feedWApple, feedWSausage, resetBtn);
+        scSwitcher.sceneSwitch(mainScene, pickHedgehog, pickCat, feedWApple, feedWSausage, resetBtn);
 
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, mood, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
