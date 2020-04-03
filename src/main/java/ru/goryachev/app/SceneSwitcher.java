@@ -12,18 +12,12 @@ import java.io.IOException;
 
 public class SceneSwitcher {
 
-    public void sceneSwitch (VBox mSceneBGround, Button pickHedgehog, Button pickCat, Button feedWApple, Button feedWSausage, Button res) {
+    public void sceneSwitch (VBox mSceneBGround) {
 
         BackgroundImage mainBGround= new BackgroundImage(new Image("/BackGround.jpg",800,425,true,false),
                 BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         mSceneBGround.setBackground(new Background(mainBGround));
-
-        pickHedgehog.setVisible(false);
-        pickCat.setVisible(false);
-        feedWApple.setVisible(true);
-        feedWSausage.setVisible(true);
-        //res.setVisible(true);
 
     }
 

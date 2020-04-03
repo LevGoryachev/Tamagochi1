@@ -48,8 +48,18 @@ public class PlayController {
 
     private SceneSwitcher scSwitcher = new SceneSwitcher();
 
-    //animals
+    private void btnVisibility () {
 
+        //Welcome screen
+        pickHedgehog.setVisible(false);
+        pickCat.setVisible(false);
+        //Play screen
+        feedWApple.setVisible(true);
+        feedWSausage.setVisible(true);
+        //resetBtn.setVisible(true);
+    }
+
+    //animals
     @FXML
     private void startHedgehog(ActionEvent event) {
 
@@ -62,7 +72,8 @@ public class PlayController {
         this.imagV = imagView;
         this.animalNumber = 1;
 
-        scSwitcher.sceneSwitch(mainScene, pickHedgehog, pickCat, feedWApple, feedWSausage, resetBtn);
+        scSwitcher.sceneSwitch(mainScene);
+        btnVisibility();
 
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, mood, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
@@ -82,7 +93,8 @@ public class PlayController {
         this.imagV = imagView;
         this.animalNumber = 2;
 
-        scSwitcher.sceneSwitch(mainScene, pickHedgehog, pickCat, feedWApple, feedWSausage, resetBtn);
+        scSwitcher.sceneSwitch(mainScene);
+        btnVisibility();
 
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, mood, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
@@ -91,7 +103,6 @@ public class PlayController {
     }
 
     //meal
-
     @FXML
     private void apple(ActionEvent event) {
 
