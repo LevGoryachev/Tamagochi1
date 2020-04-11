@@ -2,14 +2,19 @@ package ru.goryachev.app;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class PlayController {
+
+public class PlayController implements Serializable, Initializable {
 
     @FXML
     private Button pickHedgehog;
@@ -38,6 +43,9 @@ public class PlayController {
     @FXML
     private Pane paneNodeSausage;
 
+    @FXML
+    public TextField userTxt = new TextField();
+
 
     int animalNumber;
     int mood;
@@ -48,12 +56,15 @@ public class PlayController {
 
     private SceneSwitcher scSwitcher = new SceneSwitcher();
 
+    public PlayController() {
+    }
+
     private void btnVisibility () {
 
-        //Welcome screen
+        //Welcome screen, animals
         pickHedgehog.setVisible(false);
         pickCat.setVisible(false);
-        //Play screen
+        //Play screen, food
         feedWApple.setVisible(true);
         feedWSausage.setVisible(true);
         //resetBtn.setVisible(true);
@@ -104,7 +115,12 @@ public class PlayController {
 
     //meal
     @FXML
-    private void apple(ActionEvent event) {
+    private void apple(ActionEvent event) throws IOException {
+
+        Saver saver = new Saver(userTxt);
+        saver.saveStatement();
+
+
 
         Image image = new Image(getClass().getResourceAsStream("/meal_apple.png"));
         ImageView imagView = new ImageView(image);
@@ -124,7 +140,10 @@ public class PlayController {
     }
 
     @FXML
-    private void sausage(ActionEvent event) {
+    private void sausage(ActionEvent event) throws IOException {
+
+        Saver saver = new Saver(userTxt);
+        saver.dropStatement();
 
         Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
         ImageView imagView = new ImageView(image);
@@ -153,4 +172,20 @@ public class PlayController {
 
     }
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Recover recover = new Recover();
+        try {
+            recover.rec(userTxt);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
+
+
