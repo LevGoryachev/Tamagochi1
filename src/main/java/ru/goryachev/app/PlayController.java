@@ -46,7 +46,6 @@ public class PlayController implements Serializable, Initializable {
     @FXML
     public TextField userTxt = new TextField();
 
-
     int animalNumber;
     int mood;
     long timeEat;
@@ -72,7 +71,7 @@ public class PlayController implements Serializable, Initializable {
 
     //animals
     @FXML
-    private void startHedgehog(ActionEvent event) {
+    private void startHedgehog() throws IOException {
 
         Image image = new Image(getClass().getResourceAsStream("/sprites_hedgehog.png"));
         ImageView imagView = new ImageView(image);
@@ -82,6 +81,9 @@ public class PlayController implements Serializable, Initializable {
         this.img = image;
         this.imagV = imagView;
         this.animalNumber = 1;
+
+        Saver saver = new Saver();
+        saver.saveStatement(animalNumber);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
@@ -93,7 +95,7 @@ public class PlayController implements Serializable, Initializable {
     }
 
     @FXML
-    private void startCat(ActionEvent event) {
+    private void startCat() throws IOException {
 
         Image image = new Image(getClass().getResourceAsStream("/sprites_cat.png"));
         ImageView imagView = new ImageView(image);
@@ -103,6 +105,10 @@ public class PlayController implements Serializable, Initializable {
         this.img = image;
         this.imagV = imagView;
         this.animalNumber = 2;
+
+        Saver saver = new Saver();
+        saver.saveStatement(animalNumber);
+
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
@@ -116,10 +122,6 @@ public class PlayController implements Serializable, Initializable {
     //meal
     @FXML
     private void apple(ActionEvent event) throws IOException {
-
-        Saver saver = new Saver(userTxt);
-        saver.saveStatement();
-
 
 
         Image image = new Image(getClass().getResourceAsStream("/meal_apple.png"));
@@ -142,8 +144,6 @@ public class PlayController implements Serializable, Initializable {
     @FXML
     private void sausage(ActionEvent event) throws IOException {
 
-        Saver saver = new Saver(userTxt);
-        saver.dropStatement();
 
         Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
         ImageView imagView = new ImageView(image);
@@ -177,11 +177,29 @@ public class PlayController implements Serializable, Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Recover recover = new Recover();
         try {
-            recover.rec(userTxt);
+            this.animalNumber = recover.rec();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+        System.out.println("Initialize check No " + animalNumber);
+        switch (animalNumber) {
+            case 1:
+                try {
+                    startHedgehog();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            break;
+
+            case 2:
+                try {
+                    startCat();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            break;
         }
 
     }

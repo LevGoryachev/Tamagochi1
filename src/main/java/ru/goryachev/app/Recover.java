@@ -10,13 +10,18 @@ import java.io.ObjectInputStream;
 public class Recover {
 
 
-    public void rec (TextField userTxt) throws IOException, ClassNotFoundException {
+    public int rec () throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream("saverx");
         ObjectInputStream objIn = new ObjectInputStream(fileIn);
-        Textor txtx = (Textor) objIn.readObject();
-        String newStrX =  txtx.uTxt;
-        userTxt.setText(newStrX);
+        int newNo = (int) objIn.readObject();
         objIn.close();
+        return newNo;
+        //animalNo = newNo;
+
+        //Textor txtx = (Textor) objIn.readObject();
+        //String newStrX =  txtx.uTxt;
+        //userTxt.setText(newStrX);
+
     }
 
 }

@@ -26,6 +26,9 @@ public class SceneSwitcher implements Serializable {
 
     public void sceneReset (Button resetClose) throws IOException {
 
+        Saver clear = new Saver();
+        clear.dropStatement();
+
         //close old window
         Stage primaryStage = (Stage) resetClose.getScene().getWindow();
         primaryStage.close();
