@@ -6,21 +6,27 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+
+
 import java.io.IOException;
 
 public class MoodReg {
 
     Pane paneNodeAnim;
     Pane paneMeal;
+    int animalNo;
     int mood;
     Image img;
     ImageView imagV;
     Button resetBtn;
     SceneSwitcher scSwitcher;
 
-    public MoodReg(Pane paneNodeAnim, Pane paneMeal, SceneSwitcher switcher, int mood, Image img, ImageView imagV, Button resetBtn) {
+    Saver saver = new Saver();
+
+    public MoodReg(Pane paneNodeAnim, Pane paneMeal, SceneSwitcher switcher, int animalNo, int mood, Image img, ImageView imagV, Button resetBtn) throws IOException {
         this.paneNodeAnim = paneNodeAnim;
         this.paneMeal = paneMeal;
+        this.animalNo = animalNo;
         this.mood = mood;
         this.img = img;
         this.imagV = imagV;
@@ -28,7 +34,7 @@ public class MoodReg {
         this.scSwitcher = switcher;
     }
 
-    public void increaser() {
+    public void increaser() throws IOException {
 
         if (this.mood <= 440) {
             this.increaseMood();
@@ -84,15 +90,17 @@ public class MoodReg {
         timer.start();
     }
 
-    public void increaseMood() {
+    public void increaseMood() throws IOException {
         if (this.mood >= 220) {
             this.mood = mood - 220;
+            saver.writeState(animalNo, mood);
         }
     }
 
-    public void decreaseMood() {
+    public void decreaseMood() throws IOException {
         if (this.mood <= 440) {
             this.mood = mood + 220;
+            saver.writeState(animalNo, mood);
         }
     }
 }

@@ -3,15 +3,19 @@ package ru.goryachev.app;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.HashMap;
 
 public class Recover {
 
-    public int readState () throws IOException, ClassNotFoundException {
+    public HashMap<String, Integer> readState () throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream("condition.bin");
         ObjectInputStream objIn = new ObjectInputStream(fileIn);
-        int newNo = (int) objIn.readObject();
+
+        HashMap reMap = (HashMap) objIn.readObject();
+
         objIn.close();
-        return newNo;
+
+        return reMap;
 
     }
 

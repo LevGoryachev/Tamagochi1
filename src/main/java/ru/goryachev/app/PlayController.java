@@ -11,6 +11,7 @@ import javafx.scene.layout.*;
 
 import java.io.*;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 
@@ -43,8 +44,8 @@ public class PlayController implements Serializable, Initializable {
     @FXML
     private Pane paneNodeSausage;
 
-    @FXML
-    public TextField userTxt = new TextField();
+   // @FXML
+   // public TextField userTxt = new TextField();
 
     int animalNumber;
     int mood;
@@ -61,11 +62,11 @@ public class PlayController implements Serializable, Initializable {
 
     private void btnVisibility () {
 
-        //Welcome screen, animals
+        //Welcome screen, hide animal buttons
         pickHedgehog.setVisible(false);
         pickCat.setVisible(false);
 
-        //Play screen, food
+        //Play screen, show food buttons
         feedWApple.setVisible(true);
         feedWSausage.setVisible(true);
         //resetBtn.setVisible(true);
@@ -84,12 +85,12 @@ public class PlayController implements Serializable, Initializable {
         this.imagV = imagView;
         this.animalNumber = 1;
 
-        saver.writeState(animalNumber);
+        saver.writeState(animalNumber, mood);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
 
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, mood, img, imagV, resetBtn);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
 
@@ -107,12 +108,12 @@ public class PlayController implements Serializable, Initializable {
         this.imagV = imagView;
         this.animalNumber = 2;
 
-        saver.writeState(animalNumber);
+        saver.writeState(animalNumber, mood);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
 
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, mood, img, imagV, resetBtn);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, animalNumber, mood, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
 
@@ -176,7 +177,11 @@ public class PlayController implements Serializable, Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Recover recover = new Recover();
         try {
-            this.animalNumber = recover.readState();
+            HashMap<String, Integer> restoreMap = recover.readState();
+            this.animalNumber = restoreMap.get("condition");
+            this.mood = restoreMap.get("mood");
+
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
