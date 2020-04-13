@@ -54,8 +54,9 @@ public class PlayController implements Serializable, Initializable {
     MoodReg moodAdjuster;
 
     private SceneSwitcher scSwitcher = new SceneSwitcher();
+    Saver saver = new Saver();
 
-    public PlayController() {
+    public PlayController() throws IOException {
     }
 
     private void btnVisibility () {
@@ -63,6 +64,7 @@ public class PlayController implements Serializable, Initializable {
         //Welcome screen, animals
         pickHedgehog.setVisible(false);
         pickCat.setVisible(false);
+
         //Play screen, food
         feedWApple.setVisible(true);
         feedWSausage.setVisible(true);
@@ -82,8 +84,7 @@ public class PlayController implements Serializable, Initializable {
         this.imagV = imagView;
         this.animalNumber = 1;
 
-        Saver saver = new Saver();
-        saver.saveStatement(animalNumber);
+        saver.writeState(animalNumber);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
@@ -106,9 +107,7 @@ public class PlayController implements Serializable, Initializable {
         this.imagV = imagView;
         this.animalNumber = 2;
 
-        Saver saver = new Saver();
-        saver.saveStatement(animalNumber);
-
+        saver.writeState(animalNumber);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
@@ -177,7 +176,7 @@ public class PlayController implements Serializable, Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Recover recover = new Recover();
         try {
-            this.animalNumber = recover.rec();
+            this.animalNumber = recover.readState();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

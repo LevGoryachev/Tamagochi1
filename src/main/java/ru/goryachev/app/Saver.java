@@ -16,17 +16,17 @@ public class Saver implements Serializable {
 
     }
 
-    public void saveStatement (int animalNo) throws IOException {
+    public void writeState (int animalNo) throws IOException {
 
-        FileOutputStream fileOut = new FileOutputStream("saverx");
+        FileOutputStream fileOut = new FileOutputStream("condition.bin");
         ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
         objOut.writeObject(animalNo);
         objOut.close();
     }
 
-    public void dropStatement () throws IOException {
+    public void dropState () throws IOException {
         int animalNo = 0;
-        FileOutputStream fileOut = new FileOutputStream("saverx");
+        FileOutputStream fileOut = new FileOutputStream("condition.bin");
         ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
         objOut.writeObject(animalNo);
         objOut.close();

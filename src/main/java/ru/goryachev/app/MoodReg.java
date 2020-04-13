@@ -6,8 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-
 import java.io.IOException;
 
 public class MoodReg {
@@ -28,7 +26,6 @@ public class MoodReg {
         this.imagV = imagV;
         this.resetBtn = resetBtn;
         this.scSwitcher = switcher;
-
     }
 
     public void increaser() {
@@ -41,15 +38,12 @@ public class MoodReg {
             //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
             gameAnim.moveToMeal(animal, paneMeal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneMeal.getLayoutX(), paneMeal.getLayoutY());
             paneNodeAnim.getChildren().add(animal);
-            System.out.println("increaser() works succefully");
-
         }
     }
 
     public void decreaser() throws IOException {
 
         paneNodeAnim.getChildren().clear();
-
         if (this.mood >= 660) {
             scSwitcher.sceneReset(resetBtn);
             timer.stop();
@@ -79,7 +73,6 @@ public class MoodReg {
                 try {
                     decreaser();
                     changeMoment = System.currentTimeMillis() + 15000;
-                    System.out.println("decreaser() works succefully");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -88,21 +81,16 @@ public class MoodReg {
     };
 
     public void decrTimeByTime () {
-
         timer.start();
-
     }
 
-
     public void increaseMood() {
-
         if (this.mood >= 220) {
             this.mood = mood - 220;
         }
     }
 
     public void decreaseMood() {
-
         if (this.mood <= 440) {
             this.mood = mood + 220;
         }
