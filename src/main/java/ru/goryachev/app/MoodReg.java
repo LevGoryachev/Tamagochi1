@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-
 import java.io.IOException;
 
 public class MoodReg {
@@ -16,11 +15,11 @@ public class MoodReg {
     Pane paneMeal;
     int animalNo;
     int mood;
+    long timePoint;
     Image img;
     ImageView imagV;
     Button resetBtn;
     SceneSwitcher scSwitcher;
-    long timePoint; // = System.currentTimeMillis() + 5000;
 
     Saver saver = new Saver();
 
@@ -29,11 +28,11 @@ public class MoodReg {
         this.paneMeal = paneMeal;
         this.animalNo = animalNo;
         this.mood = mood;
+        this.timePoint = timePoint;
         this.img = img;
         this.imagV = imagV;
         this.resetBtn = resetBtn;
         this.scSwitcher = switcher;
-        this.timePoint = timePoint;
     }
 
     public void increaser() throws IOException {
@@ -46,6 +45,9 @@ public class MoodReg {
             //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
             gameAnim.moveToMeal(animal, paneMeal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneMeal.getLayoutX(), paneMeal.getLayoutY());
             paneNodeAnim.getChildren().add(animal);
+
+            //rewrite current params (file: condition.bin)
+            saver.writeState(animalNo, mood, timePoint);
         }
     }
 
@@ -53,41 +55,46 @@ public class MoodReg {
 
         paneNodeAnim.getChildren().clear();
         if (this.mood >= 660) {
-            scSwitcher.sceneReset(resetBtn);
+
+            //rewrite params with default (file: condition.bin)
+            saver.dropState();
+
             timer.stop();
-            System.out.println("sceneResetting...");
+            scSwitcher.sceneReset(resetBtn);
+            System.out.println("SCENEResetting...");
         }
 
-        if (this.mood >= 440) {
+        if (this.mood == 440) {
             this.decreaseMood();
             ImageView imgDead = new ImageView(img);
             imgDead.setViewport(new Rectangle2D(660, 0, 200, 200));
             paneNodeAnim.getChildren().add(imgDead);
-        } else {
+
+            //rewrite current params (file: condition.bin)
+            saver.writeState(animalNo, mood, timePoint);
+            System.out.println("440-660 FALLING AND SAVING");
+        }
+
+        if (this.mood < 440) {
             this.decreaseMood();
             Animal animal = new Animal(imagV, mood);
             paneNodeAnim.getChildren().add(animal);
-        }
 
+            //rewrite current params (file: condition.bin)
+            saver.writeState(animalNo, mood, timePoint);
+            System.out.println("0-440 DECREASING AND SAVING");
+        }
     }
 
-
-
     AnimationTimer timer = new AnimationTimer() {
-
-
 
         @Override
         public void handle(long l) {
 
-
-
             if (timePoint <= System.currentTimeMillis()) {
-
                 try {
                     decreaser();
-                    timePoint = System.currentTimeMillis() + 15000;
-                    saver.writeState(animalNo, mood, timePoint);
+                    timePoint = timePoint + 15000;
                     System.out.println("Animation handle tp: "+ timePoint);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -103,14 +110,13 @@ public class MoodReg {
     public void increaseMood() throws IOException {
         if (this.mood >= 220) {
             this.mood = mood - 220;
-            saver.writeState(animalNo, mood, timePoint);
+
         }
     }
 
     public void decreaseMood() throws IOException {
         if (this.mood <= 440) {
             this.mood = mood + 220;
-
             System.out.println(""+ mood);
         }
     }

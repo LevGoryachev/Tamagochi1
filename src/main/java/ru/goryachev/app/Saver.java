@@ -30,6 +30,7 @@ public class Saver implements Serializable {
         ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
         objOut.writeObject(params);
         objOut.close();
+        System.out.println("DROP SCENE");
     }
 
 }

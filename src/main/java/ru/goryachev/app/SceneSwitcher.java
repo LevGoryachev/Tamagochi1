@@ -24,10 +24,6 @@ public class SceneSwitcher implements Serializable {
 
     public void sceneReset (Button resetClose) throws IOException {
 
-        //rewrite hashmap with default
-        Saver clearer = new Saver();
-        clearer.dropState();
-
         //close old window
         Stage primaryStage = (Stage) resetClose.getScene().getWindow();
         primaryStage.close();

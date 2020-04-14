@@ -4,14 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.io.*;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 
@@ -86,8 +84,9 @@ public class PlayController implements Serializable, Initializable {
         this.imagV = imagView;
         this.animalNumber = 1;
 
-        //this.timePoint = System.currentTimeMillis() + 5000;
-
+        if (this.timePoint == 0) {
+            this.timePoint = System.currentTimeMillis() + 5000;
+        }
         saver.writeState(animalNumber, mood, timePoint);
 
         scSwitcher.sceneSwitch(mainScene);
@@ -96,7 +95,7 @@ public class PlayController implements Serializable, Initializable {
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
-        System.out.println("TimePoint: " + timePoint);
+        System.out.println("HedgeHog TimePoint: " + timePoint);
 
     }
 
@@ -112,6 +111,9 @@ public class PlayController implements Serializable, Initializable {
         this.imagV = imagView;
         this.animalNumber = 2;
 
+        if (this.timePoint == 0) {
+            this.timePoint = System.currentTimeMillis() + 5000;
+        }
         saver.writeState(animalNumber, mood, timePoint);
 
         scSwitcher.sceneSwitch(mainScene);
@@ -166,14 +168,12 @@ public class PlayController implements Serializable, Initializable {
         expiredMeal.fadeMeal(imagView);
     }
 
-
     // Buttons for checking
 
     @FXML
     private void resetGame(ActionEvent event) throws IOException {
         SceneSwitcher scSwitcher = new SceneSwitcher();
         scSwitcher.sceneReset(resetBtn);
-
     }
 
 
@@ -192,8 +192,8 @@ public class PlayController implements Serializable, Initializable {
             e.printStackTrace();
         }
         System.out.println("Initialize check No " + animalNumber);
-        System.out.println("TimePoint: " + timePoint);
-        System.out.println("Mood: " + mood);
+        System.out.println("Initialize TimePoint: " + timePoint);
+        System.out.println("Initialize Mood: " + mood);
         switch (animalNumber) {
             case 1:
                 try {
