@@ -49,6 +49,7 @@ public class PlayController implements Serializable, Initializable {
 
     int animalNumber;
     int mood;
+    long timePoint;
     long timeEat;
     Image img;
     ImageView imagV;
@@ -85,14 +86,17 @@ public class PlayController implements Serializable, Initializable {
         this.imagV = imagView;
         this.animalNumber = 1;
 
-        saver.writeState(animalNumber, mood);
+        //this.timePoint = System.currentTimeMillis() + 5000;
+
+        saver.writeState(animalNumber, mood, timePoint);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
 
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, img, imagV, resetBtn);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
+        System.out.println("TimePoint: " + timePoint);
 
     }
 
@@ -108,12 +112,12 @@ public class PlayController implements Serializable, Initializable {
         this.imagV = imagView;
         this.animalNumber = 2;
 
-        saver.writeState(animalNumber, mood);
+        saver.writeState(animalNumber, mood, timePoint);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
 
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, animalNumber, mood, img, imagV, resetBtn);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
 
@@ -175,12 +179,12 @@ public class PlayController implements Serializable, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Recover recover = new Recover();
-        try {
-            HashMap<String, Integer> restoreMap = recover.readState();
-            this.animalNumber = restoreMap.get("condition");
-            this.mood = restoreMap.get("mood");
 
+        try {
+            Recover recover = new Recover();
+            this.animalNumber = recover.readState().getAnimalNo();
+            this.mood = recover.readState().getMood();
+            this.timePoint = recover.readState().getTimePoint();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -188,6 +192,8 @@ public class PlayController implements Serializable, Initializable {
             e.printStackTrace();
         }
         System.out.println("Initialize check No " + animalNumber);
+        System.out.println("TimePoint: " + timePoint);
+        System.out.println("Mood: " + mood);
         switch (animalNumber) {
             case 1:
                 try {

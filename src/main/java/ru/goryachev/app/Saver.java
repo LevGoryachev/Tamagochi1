@@ -4,34 +4,31 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.HashMap;
 
 public class Saver implements Serializable {
 
-    public Saver () throws IOException {
-    }
 
-    public void writeState (int animalNo, int mood) throws IOException {
+    public void writeState (int animalNo, int mood, long timePoint) throws IOException {
 
-        HashMap<String, Integer> hMap = new HashMap();
-        hMap.put("condition", animalNo);
-        hMap.put("mood", mood);
+        Params params = new Params(animalNo, mood, timePoint);
 
         FileOutputStream fileOut = new FileOutputStream("condition.bin");
         ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-        objOut.writeObject(hMap);
+        objOut.writeObject(params);
         objOut.close();
     }
 
     public void dropState () throws IOException {
 
-        HashMap<String, Integer> hMap = new HashMap();
-        hMap.put("condition", 0);
-        hMap.put("mood", 0);
+        int animalNo = 0;
+        int mood = 0;
+        long timePoint = 0;
+
+        Params params = new Params(animalNo, mood, timePoint);
 
         FileOutputStream fileOut = new FileOutputStream("condition.bin");
         ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-        objOut.writeObject(hMap);
+        objOut.writeObject(params);
         objOut.close();
     }
 

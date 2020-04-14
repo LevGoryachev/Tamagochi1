@@ -1,21 +1,15 @@
 package ru.goryachev.app;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.HashMap;
+import java.io.*;
 
-public class Recover {
+public class Recover implements Serializable {
 
-    public HashMap<String, Integer> readState () throws IOException, ClassNotFoundException {
+    public Params readState () throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream("condition.bin");
         ObjectInputStream objIn = new ObjectInputStream(fileIn);
-
-        HashMap reMap = (HashMap) objIn.readObject();
-
+        Params params = (Params) objIn.readObject();
         objIn.close();
-
-        return reMap;
+        return params;
 
     }
 

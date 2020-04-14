@@ -20,10 +20,11 @@ public class MoodReg {
     ImageView imagV;
     Button resetBtn;
     SceneSwitcher scSwitcher;
+    long timePoint; // = System.currentTimeMillis() + 5000;
 
     Saver saver = new Saver();
 
-    public MoodReg(Pane paneNodeAnim, Pane paneMeal, SceneSwitcher switcher, int animalNo, int mood, Image img, ImageView imagV, Button resetBtn) throws IOException {
+    public MoodReg(Pane paneNodeAnim, Pane paneMeal, SceneSwitcher switcher, int animalNo, int mood, long timePoint, Image img, ImageView imagV, Button resetBtn) throws IOException {
         this.paneNodeAnim = paneNodeAnim;
         this.paneMeal = paneMeal;
         this.animalNo = animalNo;
@@ -32,6 +33,7 @@ public class MoodReg {
         this.imagV = imagV;
         this.resetBtn = resetBtn;
         this.scSwitcher = switcher;
+        this.timePoint = timePoint;
     }
 
     public void increaser() throws IOException {
@@ -53,6 +55,7 @@ public class MoodReg {
         if (this.mood >= 660) {
             scSwitcher.sceneReset(resetBtn);
             timer.stop();
+            System.out.println("sceneResetting...");
         }
 
         if (this.mood >= 440) {
@@ -68,17 +71,24 @@ public class MoodReg {
 
     }
 
-    long changeMoment = System.currentTimeMillis() + 5000;
+
 
     AnimationTimer timer = new AnimationTimer() {
 
+
+
         @Override
         public void handle(long l) {
-            if (changeMoment <= System.currentTimeMillis()) {
+
+
+
+            if (timePoint <= System.currentTimeMillis()) {
 
                 try {
                     decreaser();
-                    changeMoment = System.currentTimeMillis() + 15000;
+                    timePoint = System.currentTimeMillis() + 15000;
+                    saver.writeState(animalNo, mood, timePoint);
+                    System.out.println("Animation handle tp: "+ timePoint);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -93,14 +103,15 @@ public class MoodReg {
     public void increaseMood() throws IOException {
         if (this.mood >= 220) {
             this.mood = mood - 220;
-            saver.writeState(animalNo, mood);
+            saver.writeState(animalNo, mood, timePoint);
         }
     }
 
     public void decreaseMood() throws IOException {
         if (this.mood <= 440) {
             this.mood = mood + 220;
-            saver.writeState(animalNo, mood);
+
+            System.out.println(""+ mood);
         }
     }
 }
