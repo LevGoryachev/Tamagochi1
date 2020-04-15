@@ -12,7 +12,7 @@ public class GameAnim extends Pane {
     public void moveToMeal (Animal animal, Pane eatingMeal, double startX, double starY, double finishX, double finishY) {
 
             Path chaoticPath = new Path();
-            chaoticPath.getElements().add(new MoveTo(startX - 200,starY));
+            chaoticPath.getElements().add(new MoveTo(startX - 200,starY + 50));
             chaoticPath.getElements().add(new LineTo(finishX - 200,finishY));
 
             PathTransition moveTo = new PathTransition();

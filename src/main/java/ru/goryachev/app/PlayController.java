@@ -59,11 +59,11 @@ public class PlayController implements Serializable, Initializable {
     ImageView imagV;
     MoodReg moodAdjuster;
 
+    public static final long STARTDELAY = 10000;
+
     private SceneSwitcher scSwitcher = new SceneSwitcher();
     Saver saver = new Saver();
 
-    public PlayController() throws IOException {
-    }
 
     private void btnVisibility () {
 
@@ -93,13 +93,14 @@ public class PlayController implements Serializable, Initializable {
         this.animalNumber = 1;
 
         if (this.timePoint == 0) {
-            this.timePoint = System.currentTimeMillis() + 5000;
+            this.timePoint = System.currentTimeMillis() + STARTDELAY;
         }
         saver.writeState(animalNumber, mood, timePoint);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
 
+        //Second parameter - which meal eats this animal
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
@@ -118,13 +119,14 @@ public class PlayController implements Serializable, Initializable {
         this.animalNumber = 2;
 
         if (this.timePoint == 0) {
-            this.timePoint = System.currentTimeMillis() + 5000;
+            this.timePoint = System.currentTimeMillis() + STARTDELAY;
         }
         saver.writeState(animalNumber, mood, timePoint);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
 
+        //Second parameter - which meal eats this animal
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
@@ -143,13 +145,14 @@ public class PlayController implements Serializable, Initializable {
         this.animalNumber = 3;
 
         if (this.timePoint == 0) {
-            this.timePoint = System.currentTimeMillis() + 5000;
+            this.timePoint = System.currentTimeMillis() + STARTDELAY;
         }
         saver.writeState(animalNumber, mood, timePoint);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
 
+        //Second parameter - which meal eats this animal
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
@@ -168,14 +171,15 @@ public class PlayController implements Serializable, Initializable {
         this.animalNumber = 4;
 
         if (this.timePoint == 0) {
-            this.timePoint = System.currentTimeMillis() + 5000;
+            this.timePoint = System.currentTimeMillis() + STARTDELAY;
         }
         saver.writeState(animalNumber, mood, timePoint);
 
         scSwitcher.sceneSwitch(mainScene);
         btnVisibility();
 
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
+        //Second parameter - which meal eats this animal
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
     }
@@ -195,7 +199,11 @@ public class PlayController implements Serializable, Initializable {
         if (timeEat <= System.currentTimeMillis()) {
             this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
 
+            // the numbers of animals, who eat this meal
             if (animalNumber == 1) {
+                this.moodAdjuster.increaser();
+            }
+            if (animalNumber == 3) {
                 this.moodAdjuster.increaser();
             }
         }
@@ -216,7 +224,11 @@ public class PlayController implements Serializable, Initializable {
         if (timeEat <= System.currentTimeMillis()) {
             this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
 
+            // the numbers of animals, who eat this meal
             if (animalNumber == 2) {
+                this.moodAdjuster.increaser();
+            }
+            if (animalNumber == 4) {
                 this.moodAdjuster.increaser();
             }
         }

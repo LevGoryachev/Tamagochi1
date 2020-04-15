@@ -19,6 +19,7 @@ public class App extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/playing.fxml"));
 
         primaryStage.setTitle("Tamagochi");
+        primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 800, 475));
         primaryStage.show();
 
