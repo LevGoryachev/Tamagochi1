@@ -22,6 +22,12 @@ public class PlayController implements Serializable, Initializable {
     private Button pickCat;
 
     @FXML
+    private Button pickTurtle;
+
+    @FXML
+    private Button pickDog;
+
+    @FXML
     private Button feedWApple;
 
     @FXML
@@ -64,6 +70,8 @@ public class PlayController implements Serializable, Initializable {
         //Welcome screen, hide animal buttons
         pickHedgehog.setVisible(false);
         pickCat.setVisible(false);
+        pickTurtle.setVisible(false);
+        pickDog.setVisible(false);
 
         //Play screen, show food buttons
         feedWApple.setVisible(true);
@@ -95,8 +103,6 @@ public class PlayController implements Serializable, Initializable {
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
-        System.out.println("HedgeHog TimePoint: " + timePoint);
-
     }
 
     @FXML
@@ -122,8 +128,58 @@ public class PlayController implements Serializable, Initializable {
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
-
     }
+
+    @FXML
+    private void startTurtle() throws IOException {
+
+        Image image = new Image(getClass().getResourceAsStream("/sprites_turtle.png"));
+        ImageView imagView = new ImageView(image);
+        Animal animal = new Animal(imagView, mood);
+        paneNodeAnim.getChildren().add(animal);
+
+        this.img = image;
+        this.imagV = imagView;
+        this.animalNumber = 3;
+
+        if (this.timePoint == 0) {
+            this.timePoint = System.currentTimeMillis() + 5000;
+        }
+        saver.writeState(animalNumber, mood, timePoint);
+
+        scSwitcher.sceneSwitch(mainScene);
+        btnVisibility();
+
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
+        timeReg.decrTimeByTime();
+        this.moodAdjuster =  timeReg;
+    }
+
+    @FXML
+    private void startDog() throws IOException {
+
+        Image image = new Image(getClass().getResourceAsStream("/sprites_dog.png"));
+        ImageView imagView = new ImageView(image);
+        Animal animal = new Animal(imagView, mood);
+        paneNodeAnim.getChildren().add(animal);
+
+        this.img = image;
+        this.imagV = imagView;
+        this.animalNumber = 4;
+
+        if (this.timePoint == 0) {
+            this.timePoint = System.currentTimeMillis() + 5000;
+        }
+        saver.writeState(animalNumber, mood, timePoint);
+
+        scSwitcher.sceneSwitch(mainScene);
+        btnVisibility();
+
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
+        timeReg.decrTimeByTime();
+        this.moodAdjuster =  timeReg;
+    }
+
 
     //meal
     @FXML
@@ -210,6 +266,20 @@ public class PlayController implements Serializable, Initializable {
                     e.printStackTrace();
                 }
             break;
+            case 3:
+                try {
+                    startTurtle();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case 4:
+                try {
+                    startDog();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
 
     }
