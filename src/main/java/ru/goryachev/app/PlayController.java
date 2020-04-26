@@ -184,6 +184,13 @@ public class PlayController implements Serializable, Initializable {
         this.moodAdjuster =  timeReg;
     }
 
+    //playButton
+/*
+        Animal animal = new Animal(imagV, mood);
+        GameAnim j = new GameAnim();
+        j.movePlaying(animal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY());
+        paneNodeAnim.getChildren().add(animal);
+*/
 
     //meal
     @FXML

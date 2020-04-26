@@ -26,4 +26,24 @@ public class GameAnim extends Pane {
             MealAnim eatenMeal = new MealAnim();
             eatenMeal.removeMeal(eatingMeal);
     }
+
+        public void movePlaying (Animal animal, double startX, double starY) {
+
+                Path chaoticPath = new Path();
+                chaoticPath.getElements().add(new MoveTo(startX - 200,starY + 50));
+                chaoticPath.getElements().add(new LineTo(startX - 300,starY + 60));
+                chaoticPath.getElements().add(new LineTo(startX - 50,starY + 150));
+                chaoticPath.getElements().add(new LineTo(startX + 100,starY + 50));
+                chaoticPath.getElements().add(new LineTo(startX - 0,starY + 20));
+                chaoticPath.getElements().add(new LineTo(startX - 250,starY + 60));
+                chaoticPath.getElements().add(new LineTo(startX - 200,starY + 50));
+
+                PathTransition moveTo = new PathTransition();
+                moveTo.setDuration(Duration.millis(5000));
+                moveTo.setPath(chaoticPath);
+                moveTo.setCycleCount(1);
+                moveTo.setAutoReverse(true);
+                moveTo.setNode(animal);
+                moveTo.play();
+        }
 }
