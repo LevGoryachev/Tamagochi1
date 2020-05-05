@@ -20,8 +20,9 @@
                <Button fx:id="pickCat" layoutX="300.0" layoutY="2.0" mnemonicParsing="false" onAction="#startCat" prefHeight="25.0" prefWidth="75.0" text="Cat" />
                <Button fx:id="pickTurtle" layoutX="450.0" layoutY="2.0" mnemonicParsing="false" onAction="#startTurtle" prefHeight="25.0" prefWidth="75.0" text="Turtle" />
                <Button fx:id="pickDog" layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onAction="#startDog" prefHeight="25.0" prefWidth="75.0" text="Dog" />
-               <Button fx:id="feedWApple" layoutX="200.0" layoutY="2.0" mnemonicParsing="false" onAction="#apple" prefHeight="25.0" prefWidth="75.0" text="Apple" visible="false" />
-               <Button fx:id="feedWSausage" layoutX="400.0" layoutY="2.0" mnemonicParsing="false" onAction="#sausage" prefHeight="25.0" prefWidth="75.0" text="Sausage" visible="false" />
+               <Button fx:id="playFun" layoutX="150.0" layoutY="2.0" mnemonicParsing="false" onAction="#playing" prefHeight="25.0" prefWidth="75.0" text="play" visible="false" />
+               <Button fx:id="feedWApple" layoutX="250.0" layoutY="2.0" mnemonicParsing="false" onAction="#apple" prefHeight="25.0" prefWidth="75.0" text="Apple" visible="false" />
+               <Button fx:id="feedWSausage" layoutX="450.0" layoutY="2.0" mnemonicParsing="false" onAction="#sausage" prefHeight="25.0" prefWidth="75.0" text="Sausage" visible="false" />
                <Button fx:id="resetBtn" layoutX="50.0" layoutY="2.0" mnemonicParsing="false" onAction="#resetGame" prefHeight="25.0" prefWidth="75.0" text="reset" visible="false" />
             </children>
          </AnchorPane>

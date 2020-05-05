@@ -28,6 +28,9 @@ public class PlayController implements Serializable, Initializable {
     private Button pickDog;
 
     @FXML
+    private Button playFun;
+
+    @FXML
     private Button feedWApple;
 
     @FXML
@@ -73,7 +76,8 @@ public class PlayController implements Serializable, Initializable {
         pickTurtle.setVisible(false);
         pickDog.setVisible(false);
 
-        //Play screen, show food buttons
+        //Play screen, show food and play buttons
+        playFun.setVisible(true);
         feedWApple.setVisible(true);
         feedWSausage.setVisible(true);
         //resetBtn.setVisible(true);
@@ -184,14 +188,16 @@ public class PlayController implements Serializable, Initializable {
         this.moodAdjuster =  timeReg;
     }
 
-    //playButton
-/*
-        Animal animal = new Animal(imagV, mood);
-        GameAnim j = new GameAnim();
-        j.movePlaying(animal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY());
-        paneNodeAnim.getChildren().add(animal);
-*/
-
+    //playing
+    @FXML
+    private void playing (ActionEvent event) {
+        if (this.moodAdjuster.getMood() < 440) {
+            Animal animal = new Animal(this.moodAdjuster.getImagV(), this.moodAdjuster.getMood());
+            GameAnim j = new GameAnim();
+            j.movePlaying(animal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY());
+            paneNodeAnim.getChildren().add(animal);
+        }
+    }
     //meal
     @FXML
     private void apple(ActionEvent event) throws IOException {

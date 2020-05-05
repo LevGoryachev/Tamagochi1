@@ -120,4 +120,13 @@ public class MoodReg {
             System.out.println(""+ mood);
         }
     }
+
+    public int getMood() {
+        return mood;
+    }
+
+    public ImageView getImagV() {
+        return imagV;
+    }
+
 }
