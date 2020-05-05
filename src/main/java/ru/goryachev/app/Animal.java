@@ -8,14 +8,14 @@ import javafx.util.Duration;
 
 public class Animal extends Pane {
 
-    ImageView imgView;
-    int count = 2;
-    int columns = 1;
-    int offsetX = 0;
-    int offsetY = 0;
-    int width = 200;
-    int height = 200;
-    SpriteAnim animation;
+    private ImageView imgView;
+    private int count = 2;
+    private int columns = 1;
+    private int offsetX = 0;
+    private int offsetY = 0;
+    private int width = 200;
+    private int height = 200;
+    private SpriteAnim animation;
 
     public Animal (ImageView imgView, int ox) {
         this.offsetX = ox;

@@ -11,15 +11,15 @@ import java.io.IOException;
 
 public class MoodReg {
 
-    Pane paneNodeAnim;
-    Pane paneMeal;
-    int animalNo;
-    int mood;
-    long timePoint;
-    Image img;
-    ImageView imagV;
-    Button resetBtn;
-    SceneSwitcher scSwitcher;
+    private Pane paneNodeAnim;
+    private Pane paneMeal;
+    private int animalNo;
+    private int mood;
+    private long timePoint;
+    private Image img;
+    private ImageView imagV;
+    private Button resetBtn;
+    private SceneSwitcher scSwitcher;
 
     Saver saver = new Saver();
 

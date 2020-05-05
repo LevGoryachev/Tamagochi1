@@ -60,13 +60,13 @@ public class PlayController implements Serializable, Initializable {
    // @FXML
    // public TextField userTxt = new TextField();
 
-    int animalNumber;
-    int mood;
-    long timePoint;
-    long timeEat;
-    Image img;
-    ImageView imagV;
-    MoodReg moodAdjuster;
+    private int animalNumber;
+    private int mood;
+    private long timePoint;
+    private long timeEat;
+    private Image img;
+    private ImageView imagV;
+    private MoodReg moodAdjuster;
 
     public static final long STARTDELAY = 10000;
 
