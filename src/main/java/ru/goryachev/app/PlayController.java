@@ -34,6 +34,9 @@ public class PlayController implements Serializable, Initializable {
     private Button feedWApple;
 
     @FXML
+    private Button feedWSeaweed;
+
+    @FXML
     private Button feedWSausage;
 
     @FXML
@@ -47,6 +50,9 @@ public class PlayController implements Serializable, Initializable {
 
     @FXML
     private Pane paneNodeApple;
+
+    @FXML
+    private Pane paneNodeSeaweed;
 
     @FXML
     private Pane paneNodeSausage;
@@ -79,6 +85,7 @@ public class PlayController implements Serializable, Initializable {
         //Play screen, show food and play buttons
         playFun.setVisible(true);
         feedWApple.setVisible(true);
+        feedWSeaweed.setVisible(true);
         feedWSausage.setVisible(true);
         //resetBtn.setVisible(true);
     }
@@ -157,7 +164,7 @@ public class PlayController implements Serializable, Initializable {
         btnVisibility();
 
         //Second parameter - which meal eats this animal
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSeaweed, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
     }
@@ -202,7 +209,6 @@ public class PlayController implements Serializable, Initializable {
     @FXML
     private void apple(ActionEvent event) throws IOException {
 
-
         Image image = new Image(getClass().getResourceAsStream("/meal_apple.png"));
         ImageView imagView = new ImageView(image);
         imagView.setFitHeight(75);
@@ -216,6 +222,25 @@ public class PlayController implements Serializable, Initializable {
             if (animalNumber == 1) {
                 this.moodAdjuster.increaser();
             }
+
+        }
+        MealAnim expiredMeal = new MealAnim();
+        expiredMeal.fadeMeal(imagView);
+    }
+
+    @FXML
+    private void seaweed(ActionEvent event) throws IOException {
+
+        Image image = new Image(getClass().getResourceAsStream("/meal_seaweed.png"));
+        ImageView imagView = new ImageView(image);
+        imagView.setFitHeight(100);
+        imagView.setFitWidth(100);
+        paneNodeSeaweed.getChildren().clear();
+        paneNodeSeaweed.getChildren().add(imagView);
+        if (timeEat <= System.currentTimeMillis()) {
+            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
+
+            // the numbers of animals, who eat this meal
             if (animalNumber == 3) {
                 this.moodAdjuster.increaser();
             }
@@ -226,7 +251,6 @@ public class PlayController implements Serializable, Initializable {
 
     @FXML
     private void sausage(ActionEvent event) throws IOException {
-
 
         Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
         ImageView imagView = new ImageView(image);
@@ -250,7 +274,6 @@ public class PlayController implements Serializable, Initializable {
     }
 
     // Buttons for checking
-
     @FXML
     private void resetGame(ActionEvent event) throws IOException {
         SceneSwitcher scSwitcher = new SceneSwitcher();
