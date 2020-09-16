@@ -1,5 +1,6 @@
 package ru.goryachev.app;
 
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +12,17 @@ import javafx.stage.WindowEvent;
 
 public class App extends Application {
 
+	
+	
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("run for test");
-
-        Parent root = FXMLLoader.load(getClass().getResource("/playing.fxml"));
-
+          
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/playing.fxml"));
+        Parent root = (Parent)loader.load();
+        PlayController controller = (PlayController)loader.getController();
+        
+        		
         primaryStage.setTitle("Tamagochi");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 800, 475));
@@ -25,8 +31,7 @@ public class App extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 System.out.println("Stage is closing");
-                //we.consume();
-
+                
             }
         });
 
@@ -43,7 +48,7 @@ public class App extends Application {
     public static void main(String[] args) {
 
         launch(args);
-
+     
     }
 }
 
