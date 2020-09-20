@@ -122,10 +122,18 @@ public class AnimalModel implements Serializable {
 	}
 	 */
 
+
+	public void setMood(int mood) {
+		this.mood = mood;
+	}
+
+
+	public void setTimePoint(long timePoint) {
+		this.timePoint = timePoint;
+	}
+
 	public MoodReg getMoodAdjuster() {
 		return moodAdjuster;
 	}
-
-		
 			
 }

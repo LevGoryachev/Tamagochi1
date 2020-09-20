@@ -25,6 +25,9 @@
                <Button fx:id="feedWApple" layoutX="300.0" layoutY="2.0" mnemonicParsing="false" onAction="#apple" prefHeight="25.0" prefWidth="75.0" text="Apple" visible="false" />
                <Button fx:id="feedWSeaweed" layoutX="475.0" layoutY="2.0" mnemonicParsing="false" onAction="#seaweed" prefHeight="25.0" prefWidth="75.0" text="Seaweed" visible="false" />
                <Button fx:id="feedWSausage" layoutX="650.0" layoutY="2.0" mnemonicParsing="false" onAction="#sausage" prefHeight="25.0" prefWidth="75.0" text="Sausage" visible="false" />
+               <Button fx:id="choiceContinue" layoutX="362.0" layoutY="-250.0" mnemonicParsing="false" onAction="#continueGame" prefHeight="25.0" prefWidth="75.0" text="Continue" visible="false" />
+               <Button fx:id="choiceReset" layoutX="362.0" layoutY="-200.0" mnemonicParsing="false" onAction="#resetGame" prefHeight="25.0" prefWidth="75.0" text="Reset" visible="false" />
+               
                <Button fx:id="resetBtn" layoutX="50.0" layoutY="2.0" mnemonicParsing="false" onAction="#resetGame" prefHeight="25.0" prefWidth="75.0" text="reset" visible="false" />
             </children>
          </AnchorPane>

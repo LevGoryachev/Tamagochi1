@@ -60,6 +60,14 @@ public class PlayController implements Serializable, Initializable {
 
     @FXML
     private Pane paneNodeSausage;
+    
+    @FXML
+    private Button choiceContinue;
+
+    @FXML
+    private Button choiceReset;
+    
+    
 
    // @FXML
    // public TextField userTxt = new TextField();
@@ -85,21 +93,41 @@ public class PlayController implements Serializable, Initializable {
 	}
 
 
-    private void btnVisibility () {
+    private void changeBtnsForPlayField () {
 
-        //Welcome screen, hide animal buttons
+        //Buttons for Welcome screen, hide animal buttons
         pickHedgehog.setVisible(false);
         pickCat.setVisible(false);
         pickTurtle.setVisible(false);
         pickDog.setVisible(false);
 
-        //Play screen, show food and play buttons
+        //Buttons for choice: continue or reset
+        choiceContinue.setVisible(false);
+        choiceReset.setVisible(false);
+        
+        //Buttons for Play screen, show food and play buttons
         playFun.setVisible(true);
         feedWApple.setVisible(true);
         feedWSeaweed.setVisible(true);
         feedWSausage.setVisible(true);
         //resetBtn.setVisible(true);
     }
+    
+    private void changeBtnsForContinue () {
+    	
+    	//Buttons for Welcome screen, hide animal buttons
+        pickHedgehog.setVisible(false);
+        pickCat.setVisible(false);
+        pickTurtle.setVisible(false);
+        pickDog.setVisible(false);
+        
+        //Buttons for choice: continue or reset
+        choiceContinue.setVisible(true);
+        choiceReset.setVisible(true);
+    	
+    }
+    
+    
     
     //animals
     @FXML
@@ -108,7 +136,7 @@ public class PlayController implements Serializable, Initializable {
     	this.animalNumber = 1;
     	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
-    	btnVisibility();
+    	changeBtnsForPlayField();
     	
     }
 
@@ -118,7 +146,7 @@ public class PlayController implements Serializable, Initializable {
     	this.animalNumber = 2;
     	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
-    	btnVisibility();
+    	changeBtnsForPlayField();
     	
     }
 
@@ -128,7 +156,7 @@ public class PlayController implements Serializable, Initializable {
     	this.animalNumber = 3;
     	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
-    	btnVisibility();
+    	changeBtnsForPlayField();
     	
     }
 
@@ -138,7 +166,7 @@ public class PlayController implements Serializable, Initializable {
     	this.animalNumber = 4;
     	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
-    	btnVisibility();
+    	changeBtnsForPlayField();
     	
     }
 
@@ -221,9 +249,22 @@ public class PlayController implements Serializable, Initializable {
         expiredMeal.fadeMeal(imagView);
     }
 
-    // Buttons for checking
+    ////Buttons for choice
+    
     @FXML
-    private void resetGame(ActionEvent event) throws IOException {
+    private void continueGame() throws IOException {
+            	
+    	animalModel.setMood(mood);
+    	animalModel.setTimePoint(timePoint);
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
+    	this.moodAdjuster = animalModel.getMoodAdjuster();
+    	changeBtnsForPlayField();
+    	    	
+    }
+
+    
+    @FXML
+    private void resetGame() throws IOException {
         SceneSwitcher scSwitcher = new SceneSwitcher();
         scSwitcher.sceneReset(resetBtn);
     }
@@ -257,41 +298,8 @@ public class PlayController implements Serializable, Initializable {
 	        System.out.println("Initialize check No " + animalNumber);
 	        System.out.println("Initialize TimePoint: " + timePoint);
 	        System.out.println("Initialize Mood: " + mood);
-	        switch (animalNumber) {
-	        
-	            case 1:
-	                try {
-	                    startHedgehog();
-	                } catch (IOException e) {
-	                    e.printStackTrace();
-	                }
-	            break;
-
-	            case 2:
-	                try {
-	                    startCat();
-	                } catch (IOException e) {
-	                    e.printStackTrace();
-	                }
-	            break;
-	            
-	            case 3:
-	                try {
-	                    startTurtle();
-	                } catch (IOException e) {
-	                    e.printStackTrace();
-	                }
-	            break;
-	                
-	            case 4:
-	                try {
-	                    startDog();
-	                } catch (IOException e) {
-	                    e.printStackTrace();
-	                }
-	            break;
-	        }
-
+	        if (animalNumber != 0) 
+	        	this.changeBtnsForContinue ();
 	    }
         
     
