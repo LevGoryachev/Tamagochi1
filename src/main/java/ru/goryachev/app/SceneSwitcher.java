@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import ru.goryachev.app.model.AnimalModel;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -22,15 +23,21 @@ public class SceneSwitcher implements Serializable {
 
     }
 
-    public void sceneReset (Button resetClose) throws IOException {
+    public void sceneReset (Button choiceReset) throws IOException {
 
         //close old window
-        Stage primaryStage = (Stage) resetClose.getScene().getWindow();
-        primaryStage.close();
+        Stage primaryStage = (Stage) choiceReset.getScene().getWindow();
+    	primaryStage.close();
 
         //open new window
-        Parent root = FXMLLoader.load(getClass().getResource("/playing.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/playing.fxml"));
+        Parent root = (Parent)loader.load();
+        AnimalModel animalModel = new AnimalModel();
+        PlayController controller = (PlayController)loader.getController();
+        controller.setAnimalModel(animalModel);
+ 
         primaryStage.setTitle("Tamagochi");
+        primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 800, 475));
         primaryStage.show();
     }

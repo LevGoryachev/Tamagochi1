@@ -18,12 +18,12 @@ public class MoodReg {
     private long timePoint;
     private Image img;
     private ImageView imagV;
-    private Button resetBtn;
+    private Button choiceReset;
     private SceneSwitcher scSwitcher;
 
     Saver saver = new Saver();
 
-    public MoodReg(Pane paneNodeAnim, Pane paneMeal, SceneSwitcher switcher, int animalNo, int mood, long timePoint, Image img, ImageView imagV, Button resetBtn) throws IOException {
+    public MoodReg(Pane paneNodeAnim, Pane paneMeal, SceneSwitcher switcher, int animalNo, int mood, long timePoint, Image img, ImageView imagV, Button choiceReset) throws IOException {
         this.paneNodeAnim = paneNodeAnim;
         this.paneMeal = paneMeal;
         this.animalNo = animalNo;
@@ -31,7 +31,7 @@ public class MoodReg {
         this.timePoint = timePoint;
         this.img = img;
         this.imagV = imagV;
-        this.resetBtn = resetBtn;
+        this.choiceReset = choiceReset;
         this.scSwitcher = switcher;
     }
 
@@ -60,7 +60,7 @@ public class MoodReg {
             saver.dropState();
 
             timer.stop();
-            scSwitcher.sceneReset(resetBtn);
+            scSwitcher.sceneReset(choiceReset);
             System.out.println("SCENEResetting...");
         }
 

@@ -44,9 +44,6 @@ public class PlayController implements Serializable, Initializable {
     private Button feedWSausage;
 
     @FXML
-    private Button resetBtn;
-
-    @FXML
     private VBox mainScene;
 
     @FXML
@@ -86,7 +83,7 @@ public class PlayController implements Serializable, Initializable {
     public static final long STARTDELAY = 10000;//wont need
 
     private SceneSwitcher scSwitcher = new SceneSwitcher();
-    Saver saver = new Saver();//wont need
+    Saver saver = new Saver();
     
     public void setAnimalModel(AnimalModel animalModel) {
 		this.animalModel = animalModel;
@@ -134,7 +131,7 @@ public class PlayController implements Serializable, Initializable {
     private void startHedgehog() throws IOException {
         
     	this.animalNumber = 1;
-    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, choiceReset);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
     	changeBtnsForPlayField();
     	
@@ -144,7 +141,7 @@ public class PlayController implements Serializable, Initializable {
     private void startCat() throws IOException {
 
     	this.animalNumber = 2;
-    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, choiceReset);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
     	changeBtnsForPlayField();
     	
@@ -154,7 +151,7 @@ public class PlayController implements Serializable, Initializable {
     private void startTurtle() throws IOException {
 
     	this.animalNumber = 3;
-    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, choiceReset);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
     	changeBtnsForPlayField();
     	
@@ -164,7 +161,7 @@ public class PlayController implements Serializable, Initializable {
     private void startDog() throws IOException {
 
     	this.animalNumber = 4;
-    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, choiceReset);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
     	changeBtnsForPlayField();
     	
@@ -256,7 +253,7 @@ public class PlayController implements Serializable, Initializable {
             	
     	animalModel.setMood(mood);
     	animalModel.setTimePoint(timePoint);
-    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, choiceReset);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
     	changeBtnsForPlayField();
     	    	
@@ -265,8 +262,11 @@ public class PlayController implements Serializable, Initializable {
     
     @FXML
     private void resetGame() throws IOException {
+    	
+    	saver.dropState();
+    	
         SceneSwitcher scSwitcher = new SceneSwitcher();
-        scSwitcher.sceneReset(resetBtn);
+        scSwitcher.sceneReset(choiceReset);
     }
 
 

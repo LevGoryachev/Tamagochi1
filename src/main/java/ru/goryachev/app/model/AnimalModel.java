@@ -33,13 +33,13 @@ public class AnimalModel implements Serializable {
     private Pane paneNodeApple;
     private VBox mainScene;
     
-    private Button resetBtn;
+    private Button choiceReset;
     
 
 	private static final long STARTDELAY = 10000;
     //Saver saver = new Saver();
     
-	public void initAnimal (int animalNumber, Pane paneNodeAnim, Pane paneNodeApple, VBox mainScene, Button resetBtn) throws IOException {
+	public void initAnimal (int animalNumber, Pane paneNodeAnim, Pane paneNodeApple, VBox mainScene, Button choiceReset) throws IOException {
 								 
 		switch (animalNumber) {
         		
@@ -73,7 +73,7 @@ public class AnimalModel implements Serializable {
         this.animalNumber = animalNumber;
         this.paneNodeAnim = paneNodeAnim;
         this.paneNodeApple = paneNodeApple;
-        this.resetBtn = resetBtn;
+        this.choiceReset = choiceReset;
 
         if (this.timePoint == 0) {
             this.timePoint = System.currentTimeMillis() + STARTDELAY;
@@ -86,7 +86,7 @@ public class AnimalModel implements Serializable {
         scSwitcher.sceneSwitch(mainScene);
       
         //Two: which meal eats this animal
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, choiceReset);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
 
