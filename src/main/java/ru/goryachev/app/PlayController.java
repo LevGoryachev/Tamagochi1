@@ -7,10 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import ru.goryachev.app.model.AnimalModel;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+
+
 
 
 public class PlayController implements Serializable, Initializable {
@@ -60,6 +64,9 @@ public class PlayController implements Serializable, Initializable {
    // @FXML
    // public TextField userTxt = new TextField();
 
+    private AnimalModel animalModel;
+    
+        
     private int animalNumber;
     private int mood;
     private long timePoint;
@@ -68,10 +75,14 @@ public class PlayController implements Serializable, Initializable {
     private ImageView imagV;
     private MoodReg moodAdjuster;
 
-    public static final long STARTDELAY = 10000;
+    public static final long STARTDELAY = 10000;//wont need
 
     private SceneSwitcher scSwitcher = new SceneSwitcher();
-    Saver saver = new Saver();
+    Saver saver = new Saver();//wont need
+    
+    public void setAnimalModel(AnimalModel animalModel) {
+		this.animalModel = animalModel;
+	}
 
 
     private void btnVisibility () {
@@ -89,112 +100,49 @@ public class PlayController implements Serializable, Initializable {
         feedWSausage.setVisible(true);
         //resetBtn.setVisible(true);
     }
-
+    
     //animals
     @FXML
     private void startHedgehog() throws IOException {
-
-        Image image = new Image(getClass().getResourceAsStream("/sprites_hedgehog.png"));
-        ImageView imagView = new ImageView(image);
-        Animal animal = new Animal(imagView, mood);
-        paneNodeAnim.getChildren().add(animal);
-
-        this.img = image;
-        this.imagV = imagView;
-        this.animalNumber = 1;
-
-        if (this.timePoint == 0) {
-            this.timePoint = System.currentTimeMillis() + STARTDELAY;
-        }
-        saver.writeState(animalNumber, mood, timePoint);
-
-        scSwitcher.sceneSwitch(mainScene);
-        btnVisibility();
-
-        //Second parameter - which meal eats this animal
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
-        timeReg.decrTimeByTime();
-        this.moodAdjuster =  timeReg;
+        
+    	this.animalNumber = 1;
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
+    	this.moodAdjuster = animalModel.getMoodAdjuster();
+    	btnVisibility();
+    	
     }
 
     @FXML
     private void startCat() throws IOException {
 
-        Image image = new Image(getClass().getResourceAsStream("/sprites_cat.png"));
-        ImageView imagView = new ImageView(image);
-        Animal animal = new Animal(imagView, mood);
-
-        paneNodeAnim.getChildren().add(animal);
-        this.img = image;
-        this.imagV = imagView;
-        this.animalNumber = 2;
-
-        if (this.timePoint == 0) {
-            this.timePoint = System.currentTimeMillis() + STARTDELAY;
-        }
-        saver.writeState(animalNumber, mood, timePoint);
-
-        scSwitcher.sceneSwitch(mainScene);
-        btnVisibility();
-
-        //Second parameter - which meal eats this animal
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
-        timeReg.decrTimeByTime();
-        this.moodAdjuster =  timeReg;
+    	this.animalNumber = 2;
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
+    	this.moodAdjuster = animalModel.getMoodAdjuster();
+    	btnVisibility();
+    	
     }
 
     @FXML
     private void startTurtle() throws IOException {
 
-        Image image = new Image(getClass().getResourceAsStream("/sprites_turtle.png"));
-        ImageView imagView = new ImageView(image);
-        Animal animal = new Animal(imagView, mood);
-        paneNodeAnim.getChildren().add(animal);
-
-        this.img = image;
-        this.imagV = imagView;
-        this.animalNumber = 3;
-
-        if (this.timePoint == 0) {
-            this.timePoint = System.currentTimeMillis() + STARTDELAY;
-        }
-        saver.writeState(animalNumber, mood, timePoint);
-
-        scSwitcher.sceneSwitch(mainScene);
-        btnVisibility();
-
-        //Second parameter - which meal eats this animal
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSeaweed, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
-        timeReg.decrTimeByTime();
-        this.moodAdjuster =  timeReg;
+    	this.animalNumber = 3;
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
+    	this.moodAdjuster = animalModel.getMoodAdjuster();
+    	btnVisibility();
+    	
     }
 
     @FXML
     private void startDog() throws IOException {
 
-        Image image = new Image(getClass().getResourceAsStream("/sprites_dog.png"));
-        ImageView imagView = new ImageView(image);
-        Animal animal = new Animal(imagView, mood);
-        paneNodeAnim.getChildren().add(animal);
-
-        this.img = image;
-        this.imagV = imagView;
-        this.animalNumber = 4;
-
-        if (this.timePoint == 0) {
-            this.timePoint = System.currentTimeMillis() + STARTDELAY;
-        }
-        saver.writeState(animalNumber, mood, timePoint);
-
-        scSwitcher.sceneSwitch(mainScene);
-        btnVisibility();
-
-        //Second parameter - which meal eats this animal
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeSausage, scSwitcher, animalNumber, mood, timePoint, img, imagV, resetBtn);
-        timeReg.decrTimeByTime();
-        this.moodAdjuster =  timeReg;
+    	this.animalNumber = 4;
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
+    	this.moodAdjuster = animalModel.getMoodAdjuster();
+    	btnVisibility();
+    	
     }
 
+    
     //playing
     @FXML
     private void playing (ActionEvent event) {
@@ -281,9 +229,79 @@ public class PlayController implements Serializable, Initializable {
     }
 
 
+	public Pane getPaneNodeAnim() {
+		return paneNodeAnim;
+	}
+
+
+	public VBox getMainScene() {
+		return mainScene;
+	}
+
+
+
+	 @Override
+	    public void initialize(URL url, ResourceBundle resourceBundle) {
+	    	
+	        try {
+	            Recover recover = new Recover();
+	            this.animalNumber = recover.readState().getAnimalNo();
+	            this.mood = recover.readState().getMood();
+	            this.timePoint = recover.readState().getTimePoint();
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } catch (ClassNotFoundException e) {
+	            e.printStackTrace();
+	        }
+	        System.out.println("Initialize check No " + animalNumber);
+	        System.out.println("Initialize TimePoint: " + timePoint);
+	        System.out.println("Initialize Mood: " + mood);
+	        switch (animalNumber) {
+	        
+	            case 1:
+	                try {
+	                    startHedgehog();
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+	            break;
+
+	            case 2:
+	                try {
+	                    startCat();
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+	            break;
+	            
+	            case 3:
+	                try {
+	                    startTurtle();
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+	            break;
+	                
+	            case 4:
+	                try {
+	                    startDog();
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+	            break;
+	        }
+
+	    }
+        
+    
+    
+    
+    
+   /* 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+    	
         try {
             Recover recover = new Recover();
             this.animalNumber = recover.readState().getAnimalNo();
@@ -299,6 +317,7 @@ public class PlayController implements Serializable, Initializable {
         System.out.println("Initialize TimePoint: " + timePoint);
         System.out.println("Initialize Mood: " + mood);
         switch (animalNumber) {
+        
             case 1:
                 try {
                     startHedgehog();
@@ -314,23 +333,26 @@ public class PlayController implements Serializable, Initializable {
                     e.printStackTrace();
                 }
             break;
+            
             case 3:
                 try {
                     startTurtle();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                break;
+            break;
+                
             case 4:
                 try {
                     startDog();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                break;
+            break;
         }
 
     }
+  */  
 
 }
 

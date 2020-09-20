@@ -8,20 +8,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import ru.goryachev.app.model.AnimalModel;
 
 
 public class App extends Application {
 
-	
-	
+		
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("run for test");
           
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/playing.fxml"));
         Parent root = (Parent)loader.load();
+        AnimalModel animalModel = new AnimalModel();
         PlayController controller = (PlayController)loader.getController();
-        
+        controller.setAnimalModel(animalModel);
+                
         		
         primaryStage.setTitle("Tamagochi");
         primaryStage.setResizable(false);
