@@ -14,9 +14,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-
-
-
 public class PlayController implements Serializable, Initializable {
 
     @FXML
@@ -63,8 +60,7 @@ public class PlayController implements Serializable, Initializable {
 
     @FXML
     private Button choiceReset;
-    
-    
+        
 
    // @FXML
    // public TextField userTxt = new TextField();
@@ -75,6 +71,9 @@ public class PlayController implements Serializable, Initializable {
     private int animalNumber;
     private int mood;
     private long timePoint;
+    
+    private int mealNumber;
+    
     private long timeEat;
     private Image img;
     private ImageView imagV;
@@ -141,7 +140,7 @@ public class PlayController implements Serializable, Initializable {
     private void startCat() throws IOException {
 
     	this.animalNumber = 2;
-    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, choiceReset);
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeSausage, mainScene, choiceReset);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
     	changeBtnsForPlayField();
     	
@@ -151,7 +150,7 @@ public class PlayController implements Serializable, Initializable {
     private void startTurtle() throws IOException {
 
     	this.animalNumber = 3;
-    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, choiceReset);
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeSeaweed, mainScene, choiceReset);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
     	changeBtnsForPlayField();
     	
@@ -161,7 +160,7 @@ public class PlayController implements Serializable, Initializable {
     private void startDog() throws IOException {
 
     	this.animalNumber = 4;
-    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, choiceReset);
+    	animalModel.initAnimal(animalNumber, paneNodeAnim, paneNodeSausage, mainScene, choiceReset);
     	this.moodAdjuster = animalModel.getMoodAdjuster();
     	changeBtnsForPlayField();
     	
@@ -170,7 +169,7 @@ public class PlayController implements Serializable, Initializable {
     
     //playing
     @FXML
-    private void playing (ActionEvent event) {
+    private void playing () {
         if (this.moodAdjuster.getMood() < 440) {
             Animal animal = new Animal(this.moodAdjuster.getImagV(), this.moodAdjuster.getMood());
             GameAnim j = new GameAnim();
@@ -180,7 +179,7 @@ public class PlayController implements Serializable, Initializable {
     }
     //meal
     @FXML
-    private void apple(ActionEvent event) throws IOException {
+    private void apple() throws IOException {
 
         Image image = new Image(getClass().getResourceAsStream("/meal_apple.png"));
         ImageView imagView = new ImageView(image);
@@ -202,7 +201,7 @@ public class PlayController implements Serializable, Initializable {
     }
 
     @FXML
-    private void seaweed(ActionEvent event) throws IOException {
+    private void seaweed() throws IOException {
 
         Image image = new Image(getClass().getResourceAsStream("/meal_seaweed.png"));
         ImageView imagView = new ImageView(image);
@@ -223,7 +222,7 @@ public class PlayController implements Serializable, Initializable {
     }
 
     @FXML
-    private void sausage(ActionEvent event) throws IOException {
+    private void sausage() throws IOException {
 
         Image image = new Image(getClass().getResourceAsStream("/meal_sausage.png"));
         ImageView imagView = new ImageView(image);
@@ -279,8 +278,6 @@ public class PlayController implements Serializable, Initializable {
 		return mainScene;
 	}
 
-
-
 	 @Override
 	    public void initialize(URL url, ResourceBundle resourceBundle) {
 	    	
@@ -302,66 +299,6 @@ public class PlayController implements Serializable, Initializable {
 	        	this.changeBtnsForContinue ();
 	    }
         
-    
-    
-    
-    
-   /* 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    	
-        try {
-            Recover recover = new Recover();
-            this.animalNumber = recover.readState().getAnimalNo();
-            this.mood = recover.readState().getMood();
-            this.timePoint = recover.readState().getTimePoint();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Initialize check No " + animalNumber);
-        System.out.println("Initialize TimePoint: " + timePoint);
-        System.out.println("Initialize Mood: " + mood);
-        switch (animalNumber) {
-        
-            case 1:
-                try {
-                    startHedgehog();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            break;
-
-            case 2:
-                try {
-                    startCat();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            break;
-            
-            case 3:
-                try {
-                    startTurtle();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            break;
-                
-            case 4:
-                try {
-                    startDog();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            break;
-        }
-
-    }
-  */  
-
 }
 
 

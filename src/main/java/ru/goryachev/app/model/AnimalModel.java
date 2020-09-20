@@ -30,7 +30,7 @@ public class AnimalModel implements Serializable {
     private long timePoint;
     private MoodReg moodAdjuster;
     private Pane paneNodeAnim;
-    private Pane paneNodeApple;
+    private Pane paneMeal;
     private VBox mainScene;
     
     private Button choiceReset;
@@ -39,7 +39,7 @@ public class AnimalModel implements Serializable {
 	private static final long STARTDELAY = 10000;
     //Saver saver = new Saver();
     
-	public void initAnimal (int animalNumber, Pane paneNodeAnim, Pane paneNodeApple, VBox mainScene, Button choiceReset) throws IOException {
+	public void initAnimal (int animalNumber, Pane paneNodeAnim, Pane paneMeal, VBox mainScene, Button choiceReset) throws IOException {
 								 
 		switch (animalNumber) {
         		
@@ -72,7 +72,7 @@ public class AnimalModel implements Serializable {
         this.animal = animal;
         this.animalNumber = animalNumber;
         this.paneNodeAnim = paneNodeAnim;
-        this.paneNodeApple = paneNodeApple;
+        this.paneMeal = paneMeal;
         this.choiceReset = choiceReset;
 
         if (this.timePoint == 0) {
@@ -86,43 +86,13 @@ public class AnimalModel implements Serializable {
         scSwitcher.sceneSwitch(mainScene);
       
         //Two: which meal eats this animal
-        MoodReg timeReg = new MoodReg(paneNodeAnim, paneNodeApple, scSwitcher, animalNumber, mood, timePoint, img, imagV, choiceReset);
+        MoodReg timeReg = new MoodReg(paneNodeAnim, paneMeal, scSwitcher, animalNumber, mood, timePoint, img, imagV, choiceReset);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
 
 	}
 	
 	
-	/*
-	public void initialize() {
-		
-		try {
-            Recover recover = new Recover();
-            this.animalNumber = recover.readState().getAnimalNo();
-            this.mood = recover.readState().getMood();
-            this.timePoint = recover.readState().getTimePoint();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Initialize animal No " + animalNumber);
-        System.out.println("Initialize TimePoint: " + timePoint);
-        System.out.println("Initialize Mood: " + mood);
-        
-        if (animalNumber != 0) 
-        	try {
-        		initAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, resetBtn);
-        	} catch (IOException e) {
-        		e.printStackTrace();
-        	}
-        
-
-	}
-	 */
-
-
 	public void setMood(int mood) {
 		this.mood = mood;
 	}
