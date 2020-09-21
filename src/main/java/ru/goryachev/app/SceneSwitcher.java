@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import ru.goryachev.app.model.AnimalModel;
+import ru.goryachev.app.model.MealModel;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -33,8 +34,11 @@ public class SceneSwitcher implements Serializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/playing.fxml"));
         Parent root = (Parent)loader.load();
         AnimalModel animalModel = new AnimalModel();
+        MealModel mealModel = new MealModel();
         PlayController controller = (PlayController)loader.getController();
         controller.setAnimalModel(animalModel);
+        controller.setMealModel(mealModel);
+        
  
         primaryStage.setTitle("Tamagochi");
         primaryStage.setResizable(false);

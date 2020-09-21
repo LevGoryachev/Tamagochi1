@@ -39,7 +39,7 @@ public class AnimalModel implements Serializable {
 	private static final long STARTDELAY = 10000;
     //Saver saver = new Saver();
     
-	public void initAnimal (int animalNumber, Pane paneNodeAnim, Pane paneMeal, VBox mainScene, Button choiceReset) throws IOException {
+	public void createAnimal (int animalNumber, Pane paneNodeAnim, Pane paneMeal, VBox mainScene, Button choiceReset) throws IOException {
 								 
 		switch (animalNumber) {
         		
@@ -60,15 +60,12 @@ public class AnimalModel implements Serializable {
 				break;
 		}
 		 
-		//join these strings with this.fields
-		Image image = new Image(getClass().getResourceAsStream(imageFileName));
-        ImageView imagView = new ImageView(image);
-        Animal animal = new Animal(imagView, mood);
-
+		
+		this.img = new Image(getClass().getResourceAsStream(imageFileName));
+		this.imagV = new ImageView(img);
+        Animal animal = new Animal(imagV, mood);
         paneNodeAnim.getChildren().add(animal);
-        
-        this.img = image;
-        this.imagV = imagView;
+                
         this.animal = animal;
         this.animalNumber = animalNumber;
         this.paneNodeAnim = paneNodeAnim;
@@ -89,14 +86,11 @@ public class AnimalModel implements Serializable {
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneMeal, scSwitcher, animalNumber, mood, timePoint, img, imagV, choiceReset);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
-
 	}
-	
-	
+		
 	public void setMood(int mood) {
 		this.mood = mood;
 	}
-
 
 	public void setTimePoint(long timePoint) {
 		this.timePoint = timePoint;

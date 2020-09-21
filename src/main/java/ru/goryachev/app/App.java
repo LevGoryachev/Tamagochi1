@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import ru.goryachev.app.model.AnimalModel;
+import ru.goryachev.app.model.MealModel;
 
 
 public class App extends Application {
@@ -21,9 +22,10 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/playing.fxml"));
         Parent root = (Parent)loader.load();
         AnimalModel animalModel = new AnimalModel();
+        MealModel mealModel = new MealModel();
         PlayController controller = (PlayController)loader.getController();
         controller.setAnimalModel(animalModel);
-                
+        controller.setMealModel(mealModel);        
         		
         primaryStage.setTitle("Tamagochi");
         primaryStage.setResizable(false);
