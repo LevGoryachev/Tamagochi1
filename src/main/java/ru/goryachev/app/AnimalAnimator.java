@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-public class Animal extends Pane {
+public class AnimalAnimator extends Pane {
 
     private ImageView imgView;
     private int count = 2;
@@ -17,7 +17,7 @@ public class Animal extends Pane {
     private int height = 200;
     private SpriteAnim animation;
 
-    public Animal (ImageView imgView, int ox) {
+    public AnimalAnimator (ImageView imgView, int ox) {
         this.offsetX = ox;
         this.imgView = imgView;
         imgView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));

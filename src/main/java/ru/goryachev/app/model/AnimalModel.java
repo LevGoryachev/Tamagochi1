@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import ru.goryachev.app.Animal;
+import ru.goryachev.app.AnimalAnimator;
 import ru.goryachev.app.MoodReg;
 import ru.goryachev.app.Recover;
 import ru.goryachev.app.Saver;
@@ -26,7 +26,7 @@ public class AnimalModel implements Serializable {
 	private int mood;
 	private Image img;
     private ImageView imagV;
-    private Animal animal;
+    private AnimalAnimator animalAnimator;
     private long timePoint;
     private MoodReg moodAdjuster;
     private Pane paneNodeAnim;
@@ -63,10 +63,10 @@ public class AnimalModel implements Serializable {
 		
 		this.img = new Image(getClass().getResourceAsStream(imageFileName));
 		this.imagV = new ImageView(img);
-        Animal animal = new Animal(imagV, mood);
-        paneNodeAnim.getChildren().add(animal);
+        AnimalAnimator animalAnimator = new AnimalAnimator(imagV, mood);
+        paneNodeAnim.getChildren().add(animalAnimator);
                 
-        this.animal = animal;
+        this.animalAnimator = animalAnimator;
         this.animalNumber = animalNumber;
         this.paneNodeAnim = paneNodeAnim;
         this.paneMeal = paneMeal;

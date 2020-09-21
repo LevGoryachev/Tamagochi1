@@ -40,11 +40,11 @@ public class MoodReg {
         if (this.mood <= 440) {
             this.increaseMood();
             paneNodeAnim.getChildren().clear();
-            Animal animal = new Animal(imagV, mood);
-            GameAnim gameAnim = new GameAnim();
+            AnimalAnimator animalAnimator = new AnimalAnimator(imagV, mood);
+            GameAnimator gameAnim = new GameAnimator();
             //Parameters: animal which to move, for what meal to, X of animal, Y of animal, X of meal, Y of meal
-            gameAnim.moveToMeal(animal, paneMeal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneMeal.getLayoutX(), paneMeal.getLayoutY());
-            paneNodeAnim.getChildren().add(animal);
+            gameAnim.moveToMeal(animalAnimator, paneMeal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY(), paneMeal.getLayoutX(), paneMeal.getLayoutY());
+            paneNodeAnim.getChildren().add(animalAnimator);
 
             //rewrite current params (file: condition.bin)
             saver.writeState(animalNo, mood, timePoint);
@@ -77,7 +77,7 @@ public class MoodReg {
 
         if (this.mood < 440) {
             this.decreaseMood();
-            Animal animal = new Animal(imagV, mood);
+            AnimalAnimator animal = new AnimalAnimator(imagV, mood);
             paneNodeAnim.getChildren().add(animal);
 
             //rewrite current params (file: condition.bin)

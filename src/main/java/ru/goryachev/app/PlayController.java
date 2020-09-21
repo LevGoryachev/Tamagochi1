@@ -165,8 +165,8 @@ public class PlayController implements Serializable, Initializable {
     @FXML
     private void playing () {
         if (this.moodAdjuster.getMood() < 440) {
-            Animal animal = new Animal(this.moodAdjuster.getImagV(), this.moodAdjuster.getMood());
-            GameAnim j = new GameAnim();
+            AnimalAnimator animal = new AnimalAnimator(this.moodAdjuster.getImagV(), this.moodAdjuster.getMood());
+            GameAnimator j = new GameAnimator();
             j.movePlaying(animal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY());
             paneNodeAnim.getChildren().add(animal);
         }

@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import ru.goryachev.app.MealAnim;
+import ru.goryachev.app.MealAnimator;
 import ru.goryachev.app.MoodReg;
 
 public class MealModel {
@@ -60,7 +60,7 @@ public class MealModel {
 
 	        }
 	        
-	        MealAnim expiredMeal = new MealAnim();
+	        MealAnimator expiredMeal = new MealAnimator();
 	        expiredMeal.fadeMeal(imagV);
 		}
 

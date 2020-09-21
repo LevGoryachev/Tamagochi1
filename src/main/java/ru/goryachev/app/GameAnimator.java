@@ -7,9 +7,9 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
-public class GameAnim extends Pane {
+public class GameAnimator extends Pane {
 
-    public void moveToMeal (Animal animal, Pane eatingMeal, double startX, double starY, double finishX, double finishY) {
+    public void moveToMeal (AnimalAnimator animalAnimator, Pane eatingMeal, double startX, double starY, double finishX, double finishY) {
 
             Path chaoticPath = new Path();
             chaoticPath.getElements().add(new MoveTo(startX - 200,starY + 50));
@@ -20,14 +20,14 @@ public class GameAnim extends Pane {
             moveTo.setPath(chaoticPath);
             moveTo.setCycleCount(2);
             moveTo.setAutoReverse(true);
-            moveTo.setNode(animal);
+            moveTo.setNode(animalAnimator);
             moveTo.play();
 
-            MealAnim eatenMeal = new MealAnim();
+            MealAnimator eatenMeal = new MealAnimator();
             eatenMeal.removeMeal(eatingMeal);
     }
 
-        public void movePlaying (Animal animal, double startX, double starY) {
+        public void movePlaying (AnimalAnimator animalAnimator, double startX, double starY) {
 
                 Path chaoticPath = new Path();
                 chaoticPath.getElements().add(new MoveTo(startX - 200,starY + 50));
@@ -43,7 +43,7 @@ public class GameAnim extends Pane {
                 moveTo.setPath(chaoticPath);
                 moveTo.setCycleCount(1);
                 moveTo.setAutoReverse(true);
-                moveTo.setNode(animal);
+                moveTo.setNode(animalAnimator);
                 moveTo.play();
         }
 }
