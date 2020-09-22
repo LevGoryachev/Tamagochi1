@@ -16,7 +16,6 @@ import java.io.IOException;
 public class MoodAdjuster {
 	
     private Pane paneNodeAnim;
-    private Pane paneMeal;
     private int animalNumber;
     private int mood;
     private long timePoint;
@@ -26,14 +25,10 @@ public class MoodAdjuster {
     private SceneSwitcher scSwitcher;
     private long timeEat;
     
-    Saver saver = new Saver();
+    private Saver saver = new Saver();
     
     private static final long STARTDELAY = 10000;
     
-    public MoodAdjuster() {
-    	
-    }
-
     public void increaser(int animalNumber, Pane paneNodeAnim, Pane paneMeal, ImageView imagV) throws IOException {
      	
         if (this.mood <= 440) {
@@ -85,9 +80,6 @@ public class MoodAdjuster {
         }
     }
 
-    
-    
-    
     AnimationTimer timer = new AnimationTimer() {
 
         @Override
@@ -115,7 +107,6 @@ public class MoodAdjuster {
                 try {
 					this.increaser(animalNumber, paneNodeAnim, paneMeal, imagV);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
@@ -123,8 +114,6 @@ public class MoodAdjuster {
     	
     }
     
-    
-
     public void decrTimeByTime (int animalNumber, int mood, Pane paneNodeAnim, SceneSwitcher scSwitcher,Image img, ImageView imagV, Button choiceReset) {
     	
     	if (this.timePoint == 0) {
@@ -165,14 +154,8 @@ public class MoodAdjuster {
         return imagV;
     }
     
-	public void setPaneMeal(Pane paneMeal) {
-		this.paneMeal = paneMeal;
-	}
-	
 	public void setTimePoint(long timePoint) {
 		this.timePoint = timePoint;
 	}
 	
-	
-
 }

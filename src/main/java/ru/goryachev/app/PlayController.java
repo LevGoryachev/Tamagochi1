@@ -125,7 +125,6 @@ public class PlayController implements Serializable, Initializable {
     	this.imagV = animalModel.getImagV();
     	this.mealChosen = animalModel.getMealChosen();
     	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
-       	moodAdjuster.setPaneMeal(paneNodeApple);//set a meal which this animal eats
        	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
         scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();
@@ -139,7 +138,6 @@ public class PlayController implements Serializable, Initializable {
     	this.imagV = animalModel.getImagV();
     	this.mealChosen = animalModel.getMealChosen();
     	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
-       	moodAdjuster.setPaneMeal(paneNodeSausage);//set a meal which this animal eats
        	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
         scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();
@@ -153,7 +151,6 @@ public class PlayController implements Serializable, Initializable {
     	this.imagV = animalModel.getImagV();
     	this.mealChosen = animalModel.getMealChosen();
     	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
-       	moodAdjuster.setPaneMeal(paneNodeSeaweed);//set a meal which this animal eats
        	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
         scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();
@@ -167,7 +164,6 @@ public class PlayController implements Serializable, Initializable {
     	this.imagV = animalModel.getImagV();
     	this.mealChosen = animalModel.getMealChosen();
     	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
-       	moodAdjuster.setPaneMeal(paneNodeSausage);//set a meal which this animal eats
        	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
         scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();
@@ -226,8 +222,7 @@ public class PlayController implements Serializable, Initializable {
     	this.mealChosen = animalModel.getMealChosen();
     	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
     	moodAdjuster.setTimePoint(timePoint);
-    	moodAdjuster.setPaneMeal(paneNodeApple);//set a meal which this animal eats
-       	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
+    	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
     	
     	scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();

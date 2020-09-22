@@ -26,13 +26,10 @@ public class App extends Application {
         AnimalModel animalModel = new AnimalModel();
         MealModelling mealModel = new MealModel();
         MoodAdjuster moodAdjuster = new MoodAdjuster();
-        
         PlayController controller = (PlayController)loader.getController();
         controller.setAnimalModel(animalModel);
         controller.setMealModel(mealModel);
         controller.setMoodAdjuster(moodAdjuster);
-        
-        
         		
         primaryStage.setTitle("Tamagochi");
         primaryStage.setResizable(false);

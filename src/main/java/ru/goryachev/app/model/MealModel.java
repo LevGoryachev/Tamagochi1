@@ -49,17 +49,6 @@ public class MealModel implements MealModelling {
 	        this.imagV = new ImageView(image);
 	        this.imagV.setFitHeight(this.height);
 	        this.imagV.setFitWidth(this.width);
-	        /*
-	        if (timeEat <= System.currentTimeMillis()) {
-	            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
-
-	            // check if the meal is appropriate for our animal 
-	            if (mealNumber == mealChosen) {
-	                this.moodAdjuster.increaser();
-	            }
-
-	        }
-	        */
 	        MealAnimator expiredMeal = new MealAnimator();
 	        expiredMeal.fadeMeal(imagV);
 		}
