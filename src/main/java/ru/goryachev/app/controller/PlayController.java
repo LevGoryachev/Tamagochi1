@@ -1,4 +1,4 @@
-package ru.goryachev.app;
+package ru.goryachev.app.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -6,9 +6,16 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import ru.goryachev.app.model.AnimalModel;
-import ru.goryachev.app.model.MealModelling;
-import ru.goryachev.app.model.MoodAdjuster;
+import ru.goryachev.app.animalmodel.AnimalAnimator;
+import ru.goryachev.app.animalmodel.AnimalModel;
+import ru.goryachev.app.animalmodel.AnimalModelling;
+import ru.goryachev.app.behaviormodel.BehaviorModelling;
+import ru.goryachev.app.behaviormodel.GameAnimator;
+import ru.goryachev.app.behaviormodel.MoodAdjuster;
+import ru.goryachev.app.mealmodel.MealModelling;
+import ru.goryachev.app.scene.SceneSwitcher;
+import ru.goryachev.app.serializer.Recover;
+import ru.goryachev.app.serializer.Saver;
 
 import java.io.*;
 import java.net.URL;
@@ -66,9 +73,9 @@ public class PlayController implements Serializable, Initializable {
    // @FXML
    // public TextField userTxt = new TextField();
 
-    private AnimalModel animalModel;
+    private AnimalModelling animalModel;
     private MealModelling mealModel;
-    private MoodAdjuster moodAdjuster;
+    private BehaviorModelling moodAdjuster;
             
 	private int animalNumber;
     private int mood;
@@ -185,7 +192,7 @@ public class PlayController implements Serializable, Initializable {
     @FXML
     private void apple() throws IOException {
     	int mealNumber = 1;    	
-    	mealModel.createMeal(mealNumber, moodAdjuster, mealChosen);
+    	mealModel.createMeal(mealNumber);
         paneNodeApple.getChildren().clear();
         paneNodeApple.getChildren().add(mealModel.getImagV());
         this.moodAdjuster.increaseByMeal(mealNumber, paneNodeAnim, paneNodeApple, imagV, mealNumber, mealChosen);
@@ -195,7 +202,7 @@ public class PlayController implements Serializable, Initializable {
     private void seaweed() throws IOException {
 
     	int mealNumber = 2;    	
-    	mealModel.createMeal(mealNumber, moodAdjuster, mealChosen);
+    	mealModel.createMeal(mealNumber);
     	paneNodeSeaweed.getChildren().clear();
     	paneNodeSeaweed.getChildren().add(mealModel.getImagV());
     	this.moodAdjuster.increaseByMeal(mealNumber, paneNodeAnim, paneNodeSeaweed, imagV, mealNumber, mealChosen);
@@ -205,7 +212,7 @@ public class PlayController implements Serializable, Initializable {
     private void sausage() throws IOException {
 
     	int mealNumber = 3;    	
-    	mealModel.createMeal(mealNumber, moodAdjuster, mealChosen);
+    	mealModel.createMeal(mealNumber);
     	paneNodeSausage.getChildren().clear();
     	paneNodeSausage.getChildren().add(mealModel.getImagV());
     	this.moodAdjuster.increaseByMeal(mealNumber, paneNodeAnim, paneNodeSausage, imagV, mealNumber, mealChosen);
@@ -237,7 +244,7 @@ public class PlayController implements Serializable, Initializable {
         scSwitcher.sceneReset(choiceReset);
     }
  
-    public void setAnimalModel(AnimalModel animalModel) {
+    public void setAnimalModel(AnimalModelling animalModel) {
 		this.animalModel = animalModel;
 	}
     
@@ -245,7 +252,7 @@ public class PlayController implements Serializable, Initializable {
 		this.mealModel = mealModel;
 	}
         
-	public void setMoodAdjuster(MoodAdjuster moodAdjuster) {
+	public void setMoodAdjuster(BehaviorModelling moodAdjuster) {
 		this.moodAdjuster = moodAdjuster;
 	}
 

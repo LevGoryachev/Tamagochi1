@@ -1,8 +1,10 @@
-package ru.goryachev.app;
+package ru.goryachev.app.serializer;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
-public class Recover implements Serializable {
+public class Recover {
 
     public Params readState () throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream("condition.bin");

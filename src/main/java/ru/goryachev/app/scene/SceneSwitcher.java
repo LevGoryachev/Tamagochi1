@@ -1,4 +1,4 @@
-package ru.goryachev.app;
+package ru.goryachev.app.scene;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,9 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import ru.goryachev.app.model.AnimalModel;
-import ru.goryachev.app.model.MealModel;
-import ru.goryachev.app.model.MoodAdjuster;
+import ru.goryachev.app.animalmodel.AnimalModel;
+import ru.goryachev.app.behaviormodel.MoodAdjuster;
+import ru.goryachev.app.controller.PlayController;
+import ru.goryachev.app.mealmodel.MealModel;
 
 import java.io.IOException;
 import java.io.Serializable;

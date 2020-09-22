@@ -1,4 +1,4 @@
-package ru.goryachev.app;
+package ru.goryachev.app.serializer;
 
 import java.io.Serializable;
 

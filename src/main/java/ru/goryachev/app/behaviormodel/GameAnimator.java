@@ -1,4 +1,4 @@
-package ru.goryachev.app;
+package ru.goryachev.app.behaviormodel;
 
 import javafx.animation.PathTransition;
 import javafx.scene.layout.Pane;
@@ -6,6 +6,8 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
+import ru.goryachev.app.animalmodel.AnimalAnimator;
+import ru.goryachev.app.mealmodel.MealAnimator;
 
 public class GameAnimator extends Pane {
 

@@ -1,13 +1,9 @@
-package ru.goryachev.app.model;
+package ru.goryachev.app.mealmodel;
 
 import java.io.IOException;
 
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import ru.goryachev.app.MealAnimator;
 
 public class MealModel implements MealModelling {
 	
@@ -15,15 +11,10 @@ public class MealModel implements MealModelling {
 	private double height; //setting size of imagView
 	private double width; //setting size of imagView
 	private ImageView imagV;
-	private MoodAdjuster moodAdjuster;
-	private long timeEat;
-	
+			
 		@Override
-		public void createMeal (int mealNumber, MoodAdjuster moodAdjuster, int mealChosen) throws IOException {
+		public void createMeal (int mealNumber) throws IOException {
 		
-			this.moodAdjuster = moodAdjuster;
-			
-			
 			switch (mealNumber) {
     		
 			case 1:

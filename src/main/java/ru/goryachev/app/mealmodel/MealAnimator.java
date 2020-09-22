@@ -1,4 +1,4 @@
-package ru.goryachev.app;
+package ru.goryachev.app.mealmodel;
 
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;

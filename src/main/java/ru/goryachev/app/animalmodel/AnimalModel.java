@@ -1,4 +1,4 @@
-package ru.goryachev.app.model;
+package ru.goryachev.app.animalmodel;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -12,12 +12,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import ru.goryachev.app.AnimalAnimator;
-import ru.goryachev.app.Recover;
-import ru.goryachev.app.Saver;
-import ru.goryachev.app.SceneSwitcher;
+import ru.goryachev.app.scene.SceneSwitcher;
+import ru.goryachev.app.serializer.Recover;
+import ru.goryachev.app.serializer.Saver;
 
-public class AnimalModel {
+public class AnimalModel implements AnimalModelling {
 	
 	private String imageFileName;
 	private int mood;

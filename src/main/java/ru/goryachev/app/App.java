@@ -8,10 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import ru.goryachev.app.model.AnimalModel;
-import ru.goryachev.app.model.MealModel;
-import ru.goryachev.app.model.MealModelling;
-import ru.goryachev.app.model.MoodAdjuster;
+import ru.goryachev.app.animalmodel.AnimalModel;
+import ru.goryachev.app.animalmodel.AnimalModelling;
+import ru.goryachev.app.behaviormodel.BehaviorModelling;
+import ru.goryachev.app.behaviormodel.MoodAdjuster;
+import ru.goryachev.app.controller.PlayController;
+import ru.goryachev.app.mealmodel.MealModel;
+import ru.goryachev.app.mealmodel.MealModelling;
 
 
 public class App extends Application {
@@ -23,9 +26,9 @@ public class App extends Application {
           
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/playing.fxml"));
         Parent root = (Parent)loader.load();
-        AnimalModel animalModel = new AnimalModel();
+        AnimalModelling animalModel = new AnimalModel();
         MealModelling mealModel = new MealModel();
-        MoodAdjuster moodAdjuster = new MoodAdjuster();
+        BehaviorModelling moodAdjuster = new MoodAdjuster();
         PlayController controller = (PlayController)loader.getController();
         controller.setAnimalModel(animalModel);
         controller.setMealModel(mealModel);

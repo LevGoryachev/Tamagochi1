@@ -1,4 +1,4 @@
-package ru.goryachev.app.model;
+package ru.goryachev.app.behaviormodel;
 
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Rectangle2D;
@@ -6,14 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import ru.goryachev.app.AnimalAnimator;
-import ru.goryachev.app.GameAnimator;
-import ru.goryachev.app.Saver;
-import ru.goryachev.app.SceneSwitcher;
+import ru.goryachev.app.animalmodel.AnimalAnimator;
+import ru.goryachev.app.scene.SceneSwitcher;
+import ru.goryachev.app.serializer.Saver;
 
 import java.io.IOException;
 
-public class MoodAdjuster {
+public class MoodAdjuster implements BehaviorModelling {
 	
     private Pane paneNodeAnim;
     private int animalNumber;
@@ -29,6 +28,7 @@ public class MoodAdjuster {
     
     private static final long STARTDELAY = 10000;
     
+    @Override
     public void increaser(int animalNumber, Pane paneNodeAnim, Pane paneMeal, ImageView imagV) throws IOException {
      	
         if (this.mood <= 440) {
@@ -44,7 +44,8 @@ public class MoodAdjuster {
             saver.writeState(animalNumber, mood, timePoint);
         }
     }
-
+    
+    @Override
     public void decreaser(int animalNumber, Pane paneNodeAnim, SceneSwitcher scSwitcher,Image img, ImageView imagV, Button choiceReset) throws IOException {
 
         paneNodeAnim.getChildren().clear();
@@ -97,6 +98,7 @@ public class MoodAdjuster {
         }
     };
     
+    @Override
     public void increaseByMeal (int animalNumber, Pane paneNodeAnim, Pane paneMeal, ImageView imagV, int mealNumber, int mealChosen) {
     	
     	if (timeEat <= System.currentTimeMillis()) {
@@ -114,6 +116,7 @@ public class MoodAdjuster {
     	
     }
     
+    @Override
     public void decrTimeByTime (int animalNumber, int mood, Pane paneNodeAnim, SceneSwitcher scSwitcher,Image img, ImageView imagV, Button choiceReset) {
     	
     	if (this.timePoint == 0) {
@@ -131,29 +134,33 @@ public class MoodAdjuster {
     	timer.start();
     }
        
-
+    @Override
     public void increaseMood() throws IOException {
         if (this.mood >= 220) {
             this.mood = mood - 220;
 
         }
     }
-
+    
+    @Override
     public void decreaseMood() throws IOException {
         if (this.mood <= 440) {
             this.mood = mood + 220;
             System.out.println(""+ mood);
         }
     }
-
+    
+    @Override
     public int getMood() {
         return mood;
     }
-
+    
+    @Override
     public ImageView getImagV() {
         return imagV;
     }
     
+    @Override
 	public void setTimePoint(long timePoint) {
 		this.timePoint = timePoint;
 	}

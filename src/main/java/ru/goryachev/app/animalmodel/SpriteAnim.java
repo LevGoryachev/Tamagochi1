@@ -1,4 +1,4 @@
-package ru.goryachev.app;
+package ru.goryachev.app.animalmodel;
 
 import javafx.animation.Transition;
 import javafx.geometry.Rectangle2D;
