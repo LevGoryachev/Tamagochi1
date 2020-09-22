@@ -27,6 +27,7 @@ public class MoodAdjuster implements BehaviorModelling {
     private Saver saver = new Saver();
     
     private static final long STARTDELAY = 10000;
+    private static final long DELAY = 3600000;
     
     @Override
     public void increaser(int animalNumber, Pane paneNodeAnim, Pane paneMeal, ImageView imagV) throws IOException {
@@ -89,7 +90,7 @@ public class MoodAdjuster implements BehaviorModelling {
             if (timePoint <= System.currentTimeMillis()) {
                 try {
                     decreaser(animalNumber, paneNodeAnim, scSwitcher, img, imagV, choiceReset);
-                    timePoint = timePoint + 15000;
+                    timePoint = timePoint + DELAY;
                     System.out.println("Animation handle tp: "+ timePoint);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -101,6 +102,19 @@ public class MoodAdjuster implements BehaviorModelling {
     @Override
     public void increaseByMeal (int animalNumber, Pane paneNodeAnim, Pane paneMeal, ImageView imagV, int mealNumber, int mealChosen) {
     	
+    	if (mealNumber == mealChosen) {
+    		if (timeEat <= System.currentTimeMillis()) {
+    			this.timeEat = System.currentTimeMillis() + 5500;
+                try {
+					this.increaser(animalNumber, paneNodeAnim, paneMeal, imagV);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+            }
+        }
+    	
+    	
+    	/*
     	if (timeEat <= System.currentTimeMillis()) {
             this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
 
@@ -113,7 +127,7 @@ public class MoodAdjuster implements BehaviorModelling {
 				}
             }
         }
-    	
+    	*/
     }
     
     @Override
@@ -122,7 +136,9 @@ public class MoodAdjuster implements BehaviorModelling {
     	if (this.timePoint == 0) {
             this.timePoint = System.currentTimeMillis() + STARTDELAY;
         }
-    	    	
+    	else {
+    		this.timePoint = timePoint + DELAY;
+    	}
     	this.animalNumber = animalNumber;
     	this.mood = mood;
         this.paneNodeAnim = paneNodeAnim;

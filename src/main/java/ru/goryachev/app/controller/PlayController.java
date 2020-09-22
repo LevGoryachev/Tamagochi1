@@ -7,11 +7,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import ru.goryachev.app.animalmodel.AnimalAnimator;
-import ru.goryachev.app.animalmodel.AnimalModel;
 import ru.goryachev.app.animalmodel.AnimalModelling;
 import ru.goryachev.app.behaviormodel.BehaviorModelling;
 import ru.goryachev.app.behaviormodel.GameAnimator;
-import ru.goryachev.app.behaviormodel.MoodAdjuster;
 import ru.goryachev.app.mealmodel.MealModelling;
 import ru.goryachev.app.scene.SceneSwitcher;
 import ru.goryachev.app.serializer.Recover;
@@ -69,10 +67,9 @@ public class PlayController implements Serializable, Initializable {
     @FXML
     private Button choiceReset;
         
-
-   // @FXML
-   // public TextField userTxt = new TextField();
-
+    //@FXML
+    //private Label startLabel; 
+       
     private AnimalModelling animalModel;
     private MealModelling mealModel;
     private BehaviorModelling moodAdjuster;
