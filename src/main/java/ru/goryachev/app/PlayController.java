@@ -76,15 +76,10 @@ public class PlayController implements Serializable, Initializable {
     
     private int mealChosen;
     
-    private long timeEat;
+    private long timeEat; //wont
     private Image img;
     private ImageView imagV;
-    //private MoodReg moodAdjuster;
-
-    //public static final long STARTDELAY = 10000;//wont need
-
-    //private SceneSwitcher scSwitcher = new SceneSwitcher();
-    
+        
     SceneSwitcher scSwitcher = new SceneSwitcher();
     
     Saver saver = new Saver();
@@ -120,8 +115,6 @@ public class PlayController implements Serializable, Initializable {
         choiceContinue.setVisible(true);
         choiceReset.setVisible(true);
     }
-    
-    
     
     //animals
     @FXML
@@ -199,14 +192,7 @@ public class PlayController implements Serializable, Initializable {
     	mealModel.createMeal(mealNumber, moodAdjuster, mealChosen);
         paneNodeApple.getChildren().clear();
         paneNodeApple.getChildren().add(mealModel.getImagV());
-        if (timeEat <= System.currentTimeMillis()) {
-            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
-
-            // check if the meal is appropriate for our animal 
-            if (mealNumber == mealChosen) {
-                this.moodAdjuster.increaser(animalNumber, paneNodeAnim, paneNodeApple, imagV);
-            }
-        }
+        this.moodAdjuster.increaseByMeal(mealNumber, paneNodeAnim, paneNodeApple, imagV, mealNumber, mealChosen);
     }
 
     @FXML
@@ -216,14 +202,7 @@ public class PlayController implements Serializable, Initializable {
     	mealModel.createMeal(mealNumber, moodAdjuster, mealChosen);
     	paneNodeSeaweed.getChildren().clear();
     	paneNodeSeaweed.getChildren().add(mealModel.getImagV());
-    	if (timeEat <= System.currentTimeMillis()) {
-            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
-
-            // check if the meal is appropriate for our animal 
-            if (mealNumber == mealChosen) {
-                this.moodAdjuster.increaser(animalNumber, paneNodeAnim, paneNodeSeaweed, imagV);
-            }
-        }
+    	this.moodAdjuster.increaseByMeal(mealNumber, paneNodeAnim, paneNodeSeaweed, imagV, mealNumber, mealChosen);
     }
 
     @FXML
@@ -233,14 +212,7 @@ public class PlayController implements Serializable, Initializable {
     	mealModel.createMeal(mealNumber, moodAdjuster, mealChosen);
     	paneNodeSausage.getChildren().clear();
     	paneNodeSausage.getChildren().add(mealModel.getImagV());
-    	if (timeEat <= System.currentTimeMillis()) {
-            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
-
-            // check if the meal is appropriate for our animal 
-            if (mealNumber == mealChosen) {
-                this.moodAdjuster.increaser(animalNumber, paneNodeAnim, paneNodeSausage, imagV);
-            }
-        }
+    	this.moodAdjuster.increaseByMeal(mealNumber, paneNodeAnim, paneNodeSausage, imagV, mealNumber, mealChosen);
     }
 
     //Buttons for choice (continue or reset):

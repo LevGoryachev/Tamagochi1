@@ -24,7 +24,7 @@ public class MoodAdjuster {
     private ImageView imagV;
     private Button choiceReset;
     private SceneSwitcher scSwitcher;
-
+    private long timeEat;
     
     Saver saver = new Saver();
     
@@ -85,22 +85,7 @@ public class MoodAdjuster {
         }
     }
 
-    public void decrTimeByTime (int animalNumber, int mood, Pane paneNodeAnim, SceneSwitcher scSwitcher,Image img, ImageView imagV, Button choiceReset) {
-    	
-    	if (this.timePoint == 0) {
-            this.timePoint = System.currentTimeMillis() + STARTDELAY;
-        }
-    	    	
-    	this.animalNumber = animalNumber;
-    	this.mood = mood;
-        this.paneNodeAnim = paneNodeAnim;
-        this.scSwitcher = scSwitcher;
-        this.img = img;
-        this.imagV = imagV;
-        this.choiceReset = choiceReset;
-   	
-    	timer.start();
-    }
+    
     
     
     AnimationTimer timer = new AnimationTimer() {
@@ -119,8 +104,43 @@ public class MoodAdjuster {
             }
         }
     };
-
     
+    public void increaseByMeal (int animalNumber, Pane paneNodeAnim, Pane paneMeal, ImageView imagV, int mealNumber, int mealChosen) {
+    	
+    	if (timeEat <= System.currentTimeMillis()) {
+            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
+
+            // check if the meal is appropriate for our animal 
+            if (mealNumber == mealChosen) {
+                try {
+					this.increaser(animalNumber, paneNodeAnim, paneMeal, imagV);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        }
+    	
+    }
+    
+    
+
+    public void decrTimeByTime (int animalNumber, int mood, Pane paneNodeAnim, SceneSwitcher scSwitcher,Image img, ImageView imagV, Button choiceReset) {
+    	
+    	if (this.timePoint == 0) {
+            this.timePoint = System.currentTimeMillis() + STARTDELAY;
+        }
+    	    	
+    	this.animalNumber = animalNumber;
+    	this.mood = mood;
+        this.paneNodeAnim = paneNodeAnim;
+        this.scSwitcher = scSwitcher;
+        this.img = img;
+        this.imagV = imagV;
+        this.choiceReset = choiceReset;
+   	
+    	timer.start();
+    }
        
 
     public void increaseMood() throws IOException {
