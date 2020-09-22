@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import ru.goryachev.app.model.AnimalModel;
 import ru.goryachev.app.model.MealModel;
+import ru.goryachev.app.model.MealModelling;
+import ru.goryachev.app.model.MoodAdjuster;
 
 
 public class App extends Application {
@@ -22,10 +24,15 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/playing.fxml"));
         Parent root = (Parent)loader.load();
         AnimalModel animalModel = new AnimalModel();
-        MealModel mealModel = new MealModel();
+        MealModelling mealModel = new MealModel();
+        MoodAdjuster moodAdjuster = new MoodAdjuster();
+        
         PlayController controller = (PlayController)loader.getController();
         controller.setAnimalModel(animalModel);
-        controller.setMealModel(mealModel);        
+        controller.setMealModel(mealModel);
+        controller.setMoodAdjuster(moodAdjuster);
+        
+        
         		
         primaryStage.setTitle("Tamagochi");
         primaryStage.setResizable(false);

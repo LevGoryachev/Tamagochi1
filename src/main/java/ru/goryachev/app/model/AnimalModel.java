@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import ru.goryachev.app.AnimalAnimator;
-import ru.goryachev.app.MoodReg;
 import ru.goryachev.app.Recover;
 import ru.goryachev.app.Saver;
 import ru.goryachev.app.SceneSwitcher;
@@ -28,8 +27,9 @@ public class AnimalModel implements Serializable {
     private ImageView imagV;
     private AnimalAnimator animalAnimator;
     private long timePoint;
-    private MoodReg moodAdjuster;
-    private Pane paneNodeAnim;
+    private MoodAdjuster moodAdjuster;
+    //private Pane paneNodeAnim;
+    private int mealChosen;
     private Pane paneMeal;
     private VBox mainScene;
     
@@ -39,36 +39,39 @@ public class AnimalModel implements Serializable {
 	private static final long STARTDELAY = 10000;
     //Saver saver = new Saver();
     
-	public void createAnimal (int animalNumber, Pane paneNodeAnim, Pane paneMeal, VBox mainScene, Button choiceReset) throws IOException {
+	public void createAnimal (int animalNumber) throws IOException {
 								 
 		switch (animalNumber) {
         		
 			case 1:
 				this.imageFileName = "/sprites_hedgehog.png";
+				this.mealChosen = 1;  //set a number of meal which this animal eats
 				break;
 
 			case 2:
 				this.imageFileName = "/sprites_cat.png";
+				this.mealChosen = 3; //set a number of meal which this animal eats
 				break;
          
 			case 3:
 				this.imageFileName = "/sprites_turtle.png";
+				this.mealChosen = 2; //set a number of meal which this animal eats
 				break;
         
 			case 4:
 				this.imageFileName = "/sprites_dog.png";
+				this.mealChosen = 3; //set a number of meal which this animal eats
 				break;
 		}
 		 
 		
 		this.img = new Image(getClass().getResourceAsStream(imageFileName));
 		this.imagV = new ImageView(img);
-        AnimalAnimator animalAnimator = new AnimalAnimator(imagV, mood);
-        paneNodeAnim.getChildren().add(animalAnimator);
-                
-        this.animalAnimator = animalAnimator;
+		this.animalAnimator = new AnimalAnimator(imagV, mood);
+        //paneNodeAnim.getChildren().add(animalAnimator);
+       
         this.animalNumber = animalNumber;
-        this.paneNodeAnim = paneNodeAnim;
+        //this.paneNodeAnim = paneNodeAnim;
         this.paneMeal = paneMeal;
         this.choiceReset = choiceReset;
 
@@ -79,13 +82,15 @@ public class AnimalModel implements Serializable {
         Saver saver = new Saver();
         saver.writeState(animalNumber, mood, timePoint);
         
-        SceneSwitcher scSwitcher = new SceneSwitcher();
-        scSwitcher.sceneSwitch(mainScene);
+        //SceneSwitcher scSwitcher = new SceneSwitcher();
+        //scSwitcher.sceneSwitch(mainScene);
       
         //Two: which meal eats this animal
+        /*
         MoodReg timeReg = new MoodReg(paneNodeAnim, paneMeal, scSwitcher, animalNumber, mood, timePoint, img, imagV, choiceReset);
         timeReg.decrTimeByTime();
         this.moodAdjuster =  timeReg;
+        */
 	}
 		
 	public void setMood(int mood) {
@@ -96,8 +101,24 @@ public class AnimalModel implements Serializable {
 		this.timePoint = timePoint;
 	}
 
-	public MoodReg getMoodAdjuster() {
-		return moodAdjuster;
+	//public MoodReg getMoodAdjuster() {
+	//	return moodAdjuster;
+	//}
+
+	public AnimalAnimator getAnimalAnimator() {
+		return animalAnimator;
+	}
+
+	public Image getImg() {
+		return img;
+	}
+
+	public ImageView getImagV() {
+		return imagV;
+	}
+
+	public int getMealChosen() {
+		return mealChosen;
 	}
 			
 }

@@ -1,5 +1,8 @@
 package ru.goryachev.app.model;
 
-public interface AnimalModelling {
+import java.io.IOException;
 
+public interface AnimalModelling {
+	
+	
 }

@@ -1,6 +1,5 @@
 package ru.goryachev.app;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,7 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import ru.goryachev.app.model.AnimalModel;
-import ru.goryachev.app.model.MealModel;
+import ru.goryachev.app.model.MealModelling;
+import ru.goryachev.app.model.MoodAdjuster;
 
 import java.io.*;
 import java.net.URL;
@@ -67,7 +67,8 @@ public class PlayController implements Serializable, Initializable {
    // public TextField userTxt = new TextField();
 
     private AnimalModel animalModel;
-    private MealModel mealModel;
+    private MealModelling mealModel;
+    private MoodAdjuster moodAdjuster;
             
 	private int animalNumber;
     private int mood;
@@ -78,11 +79,14 @@ public class PlayController implements Serializable, Initializable {
     private long timeEat;
     private Image img;
     private ImageView imagV;
-    private MoodReg moodAdjuster;
+    //private MoodReg moodAdjuster;
 
     //public static final long STARTDELAY = 10000;//wont need
 
     //private SceneSwitcher scSwitcher = new SceneSwitcher();
+    
+    SceneSwitcher scSwitcher = new SceneSwitcher();
+    
     Saver saver = new Saver();
     
     private void changeBtnsForPlayField () {
@@ -122,42 +126,58 @@ public class PlayController implements Serializable, Initializable {
     //animals
     @FXML
     private void startHedgehog() throws IOException {
-        
     	this.animalNumber = 1; //set an animal for game
-    	animalModel.createAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, choiceReset);
-    	this.moodAdjuster = animalModel.getMoodAdjuster();
+    	animalModel.createAnimal(animalNumber);
+    	this.img = animalModel.getImg();
+    	this.imagV = animalModel.getImagV();
+    	this.mealChosen = animalModel.getMealChosen();
+    	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
+       	moodAdjuster.setPaneMeal(paneNodeApple);//set a meal which this animal eats
+       	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
+        scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();
-       	this.mealChosen = 1; //set a meal which the chosen animal eats
     }
 
     @FXML
     private void startCat() throws IOException {
-    	
     	this.animalNumber = 2; //set an animal for game
-    	animalModel.createAnimal(animalNumber, paneNodeAnim, paneNodeSausage, mainScene, choiceReset);
-    	this.moodAdjuster = animalModel.getMoodAdjuster();
+    	animalModel.createAnimal(animalNumber);
+    	this.img = animalModel.getImg();
+    	this.imagV = animalModel.getImagV();
+    	this.mealChosen = animalModel.getMealChosen();
+    	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
+       	moodAdjuster.setPaneMeal(paneNodeSausage);//set a meal which this animal eats
+       	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
+        scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();
-    	this.mealChosen = 3; //set a meal which the chosen animal eats
     }
 
     @FXML
     private void startTurtle() throws IOException {
-
     	this.animalNumber = 3; //set an animal for game
-    	animalModel.createAnimal(animalNumber, paneNodeAnim, paneNodeSeaweed, mainScene, choiceReset);
-    	this.moodAdjuster = animalModel.getMoodAdjuster();
+    	animalModel.createAnimal(animalNumber);
+    	this.img = animalModel.getImg();
+    	this.imagV = animalModel.getImagV();
+    	this.mealChosen = animalModel.getMealChosen();
+    	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
+       	moodAdjuster.setPaneMeal(paneNodeSeaweed);//set a meal which this animal eats
+       	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
+        scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();
-    	this.mealChosen = 2; //set a meal which the chosen animal eats
     }
 
     @FXML
     private void startDog() throws IOException {
-
     	this.animalNumber = 4; //set an animal for game
-    	animalModel.createAnimal(animalNumber, paneNodeAnim, paneNodeSausage, mainScene, choiceReset);
-    	this.moodAdjuster = animalModel.getMoodAdjuster();
+    	animalModel.createAnimal(animalNumber);
+    	this.img = animalModel.getImg();
+    	this.imagV = animalModel.getImagV();
+    	this.mealChosen = animalModel.getMealChosen();
+    	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
+       	moodAdjuster.setPaneMeal(paneNodeSausage);//set a meal which this animal eats
+       	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
+        scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();
-    	this.mealChosen =3; //set a meal which the chosen animal eats
     }
 
     
@@ -166,8 +186,8 @@ public class PlayController implements Serializable, Initializable {
     private void playing () {
         if (this.moodAdjuster.getMood() < 440) {
             AnimalAnimator animal = new AnimalAnimator(this.moodAdjuster.getImagV(), this.moodAdjuster.getMood());
-            GameAnimator j = new GameAnimator();
-            j.movePlaying(animal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY());
+            GameAnimator walk = new GameAnimator();
+            walk.movePlaying(animal, paneNodeAnim.getLayoutX(), paneNodeAnim.getLayoutY());
             paneNodeAnim.getChildren().add(animal);
         }
     }
@@ -175,11 +195,18 @@ public class PlayController implements Serializable, Initializable {
     //fead
     @FXML
     private void apple() throws IOException {
-
     	int mealNumber = 1;    	
     	mealModel.createMeal(mealNumber, moodAdjuster, mealChosen);
         paneNodeApple.getChildren().clear();
         paneNodeApple.getChildren().add(mealModel.getImagV());
+        if (timeEat <= System.currentTimeMillis()) {
+            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
+
+            // check if the meal is appropriate for our animal 
+            if (mealNumber == mealChosen) {
+                this.moodAdjuster.increaser(animalNumber, paneNodeAnim, paneNodeApple, imagV);
+            }
+        }
     }
 
     @FXML
@@ -189,6 +216,14 @@ public class PlayController implements Serializable, Initializable {
     	mealModel.createMeal(mealNumber, moodAdjuster, mealChosen);
     	paneNodeSeaweed.getChildren().clear();
     	paneNodeSeaweed.getChildren().add(mealModel.getImagV());
+    	if (timeEat <= System.currentTimeMillis()) {
+            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
+
+            // check if the meal is appropriate for our animal 
+            if (mealNumber == mealChosen) {
+                this.moodAdjuster.increaser(animalNumber, paneNodeAnim, paneNodeSeaweed, imagV);
+            }
+        }
     }
 
     @FXML
@@ -198,17 +233,31 @@ public class PlayController implements Serializable, Initializable {
     	mealModel.createMeal(mealNumber, moodAdjuster, mealChosen);
     	paneNodeSausage.getChildren().clear();
     	paneNodeSausage.getChildren().add(mealModel.getImagV());
+    	if (timeEat <= System.currentTimeMillis()) {
+            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
+
+            // check if the meal is appropriate for our animal 
+            if (mealNumber == mealChosen) {
+                this.moodAdjuster.increaser(animalNumber, paneNodeAnim, paneNodeSausage, imagV);
+            }
+        }
     }
 
-    ////Buttons for choice
-    
+    //Buttons for choice (continue or reset):
     @FXML
     private void continueGame() throws IOException {
             	
     	animalModel.setMood(mood);
-    	animalModel.setTimePoint(timePoint);
-    	animalModel.createAnimal(animalNumber, paneNodeAnim, paneNodeApple, mainScene, choiceReset);
-    	this.moodAdjuster = animalModel.getMoodAdjuster();
+    	animalModel.createAnimal(animalNumber);
+    	this.img = animalModel.getImg();
+    	this.imagV = animalModel.getImagV();
+    	this.mealChosen = animalModel.getMealChosen();
+    	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
+    	moodAdjuster.setTimePoint(timePoint);
+    	moodAdjuster.setPaneMeal(paneNodeApple);//set a meal which this animal eats
+       	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
+    	
+    	scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();
     }
     
@@ -225,8 +274,12 @@ public class PlayController implements Serializable, Initializable {
 		this.animalModel = animalModel;
 	}
     
-    public void setMealModel(MealModel mealModel) {
+    public void setMealModel(MealModelling mealModel) {
 		this.mealModel = mealModel;
+	}
+        
+	public void setMoodAdjuster(MoodAdjuster moodAdjuster) {
+		this.moodAdjuster = moodAdjuster;
 	}
 
 	public Pane getPaneNodeAnim() {

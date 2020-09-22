@@ -1,4 +1,4 @@
-package ru.goryachev.app;
+package ru.goryachev.app.model;
 
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Rectangle2D;
@@ -6,14 +6,18 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import ru.goryachev.app.AnimalAnimator;
+import ru.goryachev.app.GameAnimator;
+import ru.goryachev.app.Saver;
+import ru.goryachev.app.SceneSwitcher;
 
 import java.io.IOException;
 
-public class MoodReg {
-
+public class MoodAdjuster {
+	
     private Pane paneNodeAnim;
     private Pane paneMeal;
-    private int animalNo;
+    private int animalNumber;
     private int mood;
     private long timePoint;
     private Image img;
@@ -21,22 +25,17 @@ public class MoodReg {
     private Button choiceReset;
     private SceneSwitcher scSwitcher;
 
+    
     Saver saver = new Saver();
-
-    public MoodReg(Pane paneNodeAnim, Pane paneMeal, SceneSwitcher switcher, int animalNo, int mood, long timePoint, Image img, ImageView imagV, Button choiceReset) throws IOException {
-        this.paneNodeAnim = paneNodeAnim;
-        this.paneMeal = paneMeal;
-        this.animalNo = animalNo;
-        this.mood = mood;
-        this.timePoint = timePoint;
-        this.img = img;
-        this.imagV = imagV;
-        this.choiceReset = choiceReset;
-        this.scSwitcher = switcher;
+    
+    private static final long STARTDELAY = 10000;
+    
+    public MoodAdjuster() {
+    	
     }
 
-    public void increaser() throws IOException {
-
+    public void increaser(int animalNumber, Pane paneNodeAnim, Pane paneMeal, ImageView imagV) throws IOException {
+     	
         if (this.mood <= 440) {
             this.increaseMood();
             paneNodeAnim.getChildren().clear();
@@ -47,11 +46,11 @@ public class MoodReg {
             paneNodeAnim.getChildren().add(animalAnimator);
 
             //rewrite current params (file: condition.bin)
-            saver.writeState(animalNo, mood, timePoint);
+            saver.writeState(animalNumber, mood, timePoint);
         }
     }
 
-    public void decreaser() throws IOException {
+    public void decreaser(int animalNumber, Pane paneNodeAnim, SceneSwitcher scSwitcher,Image img, ImageView imagV, Button choiceReset) throws IOException {
 
         paneNodeAnim.getChildren().clear();
         if (this.mood >= 660) {
@@ -71,7 +70,7 @@ public class MoodReg {
             paneNodeAnim.getChildren().add(imgDead);
 
             //rewrite current params (file: condition.bin)
-            saver.writeState(animalNo, mood, timePoint);
+            saver.writeState(animalNumber, mood, timePoint);
             System.out.println("440-660 FALLING AND SAVING");
         }
 
@@ -81,11 +80,29 @@ public class MoodReg {
             paneNodeAnim.getChildren().add(animal);
 
             //rewrite current params (file: condition.bin)
-            saver.writeState(animalNo, mood, timePoint);
+            saver.writeState(animalNumber, mood, timePoint);
             System.out.println("0-440 DECREASING AND SAVING");
         }
     }
 
+    public void decrTimeByTime (int animalNumber, int mood, Pane paneNodeAnim, SceneSwitcher scSwitcher,Image img, ImageView imagV, Button choiceReset) {
+    	
+    	if (this.timePoint == 0) {
+            this.timePoint = System.currentTimeMillis() + STARTDELAY;
+        }
+    	    	
+    	this.animalNumber = animalNumber;
+    	this.mood = mood;
+        this.paneNodeAnim = paneNodeAnim;
+        this.scSwitcher = scSwitcher;
+        this.img = img;
+        this.imagV = imagV;
+        this.choiceReset = choiceReset;
+   	
+    	timer.start();
+    }
+    
+    
     AnimationTimer timer = new AnimationTimer() {
 
         @Override
@@ -93,7 +110,7 @@ public class MoodReg {
 
             if (timePoint <= System.currentTimeMillis()) {
                 try {
-                    decreaser();
+                    decreaser(animalNumber, paneNodeAnim, scSwitcher, img, imagV, choiceReset);
                     timePoint = timePoint + 15000;
                     System.out.println("Animation handle tp: "+ timePoint);
                 } catch (IOException e) {
@@ -103,9 +120,8 @@ public class MoodReg {
         }
     };
 
-    public void decrTimeByTime () {
-        timer.start();
-    }
+    
+       
 
     public void increaseMood() throws IOException {
         if (this.mood >= 220) {
@@ -128,5 +144,15 @@ public class MoodReg {
     public ImageView getImagV() {
         return imagV;
     }
+    
+	public void setPaneMeal(Pane paneMeal) {
+		this.paneMeal = paneMeal;
+	}
+	
+	public void setTimePoint(long timePoint) {
+		this.timePoint = timePoint;
+	}
+	
+	
 
 }

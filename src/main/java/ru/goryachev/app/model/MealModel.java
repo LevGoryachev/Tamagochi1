@@ -8,18 +8,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import ru.goryachev.app.MealAnimator;
-import ru.goryachev.app.MoodReg;
 
-public class MealModel {
+public class MealModel implements MealModelling {
 	
 	private String imageFileName;
 	private double height; //setting size of imagView
 	private double width; //setting size of imagView
 	private ImageView imagV;
-	private MoodReg moodAdjuster;
+	private MoodAdjuster moodAdjuster;
 	private long timeEat;
-
-		public void createMeal (int mealNumber, MoodReg moodAdjuster, int mealChosen) throws IOException {
+	
+		@Override
+		public void createMeal (int mealNumber, MoodAdjuster moodAdjuster, int mealChosen) throws IOException {
 		
 			this.moodAdjuster = moodAdjuster;
 			
@@ -49,7 +49,7 @@ public class MealModel {
 	        this.imagV = new ImageView(image);
 	        this.imagV.setFitHeight(this.height);
 	        this.imagV.setFitWidth(this.width);
-	        
+	        /*
 	        if (timeEat <= System.currentTimeMillis()) {
 	            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
 
@@ -59,7 +59,7 @@ public class MealModel {
 	            }
 
 	        }
-	        
+	        */
 	        MealAnimator expiredMeal = new MealAnimator();
 	        expiredMeal.fadeMeal(imagV);
 		}

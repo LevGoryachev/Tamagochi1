@@ -9,6 +9,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import ru.goryachev.app.model.AnimalModel;
 import ru.goryachev.app.model.MealModel;
+import ru.goryachev.app.model.MoodAdjuster;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -35,10 +36,11 @@ public class SceneSwitcher implements Serializable {
         Parent root = (Parent)loader.load();
         AnimalModel animalModel = new AnimalModel();
         MealModel mealModel = new MealModel();
+        MoodAdjuster moodAdjuster = new MoodAdjuster();
         PlayController controller = (PlayController)loader.getController();
         controller.setAnimalModel(animalModel);
         controller.setMealModel(mealModel);
-        
+        controller.setMoodAdjuster(moodAdjuster);
  
         primaryStage.setTitle("Tamagochi");
         primaryStage.setResizable(false);
