@@ -157,9 +157,7 @@ public class PlayController implements Serializable, Initializable {
     	changeBtnsForPlayField();
     	
     }
-    
-
-    
+      
     //playing
     @FXML
     private void playing () {
@@ -174,31 +172,32 @@ public class PlayController implements Serializable, Initializable {
     //fead
     @FXML
     private void apple() throws IOException {
-    	int mealNumber = 1;    	
-    	mealModel.createMeal(mealNumber);
-        paneNodeApple.getChildren().clear();
-        paneNodeApple.getChildren().add(mealModel.getImagV());
-        this.moodAdjuster.increaseByMeal(mealNumber, paneNodeAnim, paneNodeApple, imagV, mealNumber, mealChosen);
+    	
+    	mealLauncher (1, paneNodeApple);
+    	
     }
 
     @FXML
     private void seaweed() throws IOException {
 
-    	int mealNumber = 2;    	
-    	mealModel.createMeal(mealNumber);
-    	paneNodeSeaweed.getChildren().clear();
-    	paneNodeSeaweed.getChildren().add(mealModel.getImagV());
-    	this.moodAdjuster.increaseByMeal(mealNumber, paneNodeAnim, paneNodeSeaweed, imagV, mealNumber, mealChosen);
+    	mealLauncher (2, paneNodeSeaweed);
+ 
     }
 
     @FXML
     private void sausage() throws IOException {
 
-    	int mealNumber = 3;    	
+    	mealLauncher (3, paneNodeSausage);
+
+    }
+    
+    private void mealLauncher (int mealNumber, Pane paneMeal) throws IOException {
+    	
     	mealModel.createMeal(mealNumber);
-    	paneNodeSausage.getChildren().clear();
-    	paneNodeSausage.getChildren().add(mealModel.getImagV());
-    	this.moodAdjuster.increaseByMeal(mealNumber, paneNodeAnim, paneNodeSausage, imagV, mealNumber, mealChosen);
+    	paneMeal.getChildren().clear();
+    	paneMeal.getChildren().add(mealModel.getImagV());
+        this.moodAdjuster.increaseByMeal(animalNumber, paneNodeAnim, paneMeal, imagV, mealNumber, mealChosen);
+    	
     }
 
     //Buttons for choice (continue or reset):
