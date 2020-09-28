@@ -123,46 +123,30 @@ public class PlayController implements Serializable, Initializable {
     //animals
     @FXML
     private void startHedgehog() throws IOException {
-    	this.animalNumber = 1; //set an animal for game
-    	animalModel.createAnimal(animalNumber);
-    	this.img = animalModel.getImg();
-    	this.imagV = animalModel.getImagV();
-    	this.mealChosen = animalModel.getMealChosen();
-    	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
-       	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
-        scSwitcher.sceneSwitch(mainScene);
-    	changeBtnsForPlayField();
+    	this.animalNumber = 1; //set an animal for game (number from model)
+    	animalLauncher ();
     }
 
     @FXML
     private void startCat() throws IOException {
-    	this.animalNumber = 2; //set an animal for game
-    	animalModel.createAnimal(animalNumber);
-    	this.img = animalModel.getImg();
-    	this.imagV = animalModel.getImagV();
-    	this.mealChosen = animalModel.getMealChosen();
-    	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
-       	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
-        scSwitcher.sceneSwitch(mainScene);
-    	changeBtnsForPlayField();
+    	this.animalNumber = 2; //set an animal for game (number from model)
+    	animalLauncher ();
     }
 
     @FXML
     private void startTurtle() throws IOException {
-    	this.animalNumber = 3; //set an animal for game
-    	animalModel.createAnimal(animalNumber);
-    	this.img = animalModel.getImg();
-    	this.imagV = animalModel.getImagV();
-    	this.mealChosen = animalModel.getMealChosen();
-    	paneNodeAnim.getChildren().add(animalModel.getAnimalAnimator());
-       	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
-        scSwitcher.sceneSwitch(mainScene);
-    	changeBtnsForPlayField();
+    	this.animalNumber = 3; //set an animal for game (number from model)
+    	animalLauncher ();
     }
 
     @FXML
     private void startDog() throws IOException {
-    	this.animalNumber = 4; //set an animal for game
+    	this.animalNumber = 4; //set an animal for game (number from model)
+    	animalLauncher ();
+    }
+    
+    private void animalLauncher () throws IOException {
+    	
     	animalModel.createAnimal(animalNumber);
     	this.img = animalModel.getImg();
     	this.imagV = animalModel.getImagV();
@@ -171,7 +155,9 @@ public class PlayController implements Serializable, Initializable {
        	moodAdjuster.decrTimeByTime(animalNumber, mood, paneNodeAnim, scSwitcher, img, imagV, choiceReset);//set behavior
         scSwitcher.sceneSwitch(mainScene);
     	changeBtnsForPlayField();
+    	
     }
+    
 
     
     //playing
