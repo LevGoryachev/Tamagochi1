@@ -28,7 +28,7 @@ public class MoodAdjuster implements BehaviorModelling {
     
     private static final long STARTDELAY = 10000;
     private static final long DELAY = 3600000;
-    
+    								  
     @Override
     public void increaser(int animalNumber, Pane paneNodeAnim, Pane paneMeal, ImageView imagV) throws IOException {
      	

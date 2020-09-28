@@ -45,7 +45,10 @@ public class AnimalModel implements AnimalModelling {
 		this.img = new Image(getClass().getResourceAsStream(imageFileName));
 		this.imagV = new ImageView(img);
 		this.animalAnimator = new AnimalAnimator(imagV, mood);
-        saver.writeState(animalNumber, mood, timePoint);
+		if (this.timePoint == 0) {		//temporary solution for bug
+            this.timePoint = System.currentTimeMillis();
+            saver.writeState(animalNumber, mood, timePoint);
+		}
  	}
 		
 	public void setMood(int mood) {
