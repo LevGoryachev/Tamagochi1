@@ -112,22 +112,6 @@ public class MoodAdjuster implements BehaviorModelling {
 				}
             }
         }
-    	
-    	
-    	/*
-    	if (timeEat <= System.currentTimeMillis()) {
-            this.timeEat = System.currentTimeMillis() + 3000; //Set 5500 later
-
-            // check if the meal is appropriate for our animal 
-            if (mealNumber == mealChosen) {
-                try {
-					this.increaser(animalNumber, paneNodeAnim, paneMeal, imagV);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-            }
-        }
-    	*/
     }
     
     @Override

@@ -3,9 +3,8 @@ package ru.goryachev.app.serializer;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
-public class Saver implements Serializable {
+public class Saver {
 
 
     public void writeState (int animalNo, int mood, long timePoint) throws IOException {

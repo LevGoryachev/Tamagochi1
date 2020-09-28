@@ -69,7 +69,6 @@ public class PlayController implements Serializable, Initializable {
         
     //@FXML
     //private Label startLabel; 
-       
     private AnimalModelling animalModel;
     private MealModelling mealModel;
     private BehaviorModelling moodAdjuster;
@@ -80,7 +79,6 @@ public class PlayController implements Serializable, Initializable {
     
     private int mealChosen;
     
-    private long timeEat; //wont
     private Image img;
     private ImageView imagV;
         

@@ -1,19 +1,8 @@
 package ru.goryachev.app.animalmodel;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import ru.goryachev.app.scene.SceneSwitcher;
-import ru.goryachev.app.serializer.Recover;
 import ru.goryachev.app.serializer.Saver;
 
 public class AnimalModel implements AnimalModelling {

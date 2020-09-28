@@ -11,11 +11,9 @@ import ru.goryachev.app.animalmodel.AnimalModel;
 import ru.goryachev.app.behaviormodel.MoodAdjuster;
 import ru.goryachev.app.controller.PlayController;
 import ru.goryachev.app.mealmodel.MealModel;
-
 import java.io.IOException;
-import java.io.Serializable;
 
-public class SceneSwitcher implements Serializable {
+public class SceneSwitcher {
 
     public void sceneSwitch (VBox mSceneBGround) {
 
@@ -23,7 +21,6 @@ public class SceneSwitcher implements Serializable {
                 BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         mSceneBGround.setBackground(new Background(mainBGround));
-
     }
 
     public void sceneReset (Button choiceReset) throws IOException {
