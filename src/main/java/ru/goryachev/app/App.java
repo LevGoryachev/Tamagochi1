@@ -15,6 +15,8 @@ import ru.goryachev.app.behaviormodel.MoodAdjuster;
 import ru.goryachev.app.controller.PlayController;
 import ru.goryachev.app.mealmodel.MealModel;
 import ru.goryachev.app.mealmodel.MealModelling;
+import ru.goryachev.app.serializer.FileSerializer;
+import ru.goryachev.app.serializer.Serializer;
 
 
 public class App extends Application {
@@ -26,13 +28,18 @@ public class App extends Application {
           
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/playing.fxml"));
         Parent root = (Parent)loader.load();
+        Serializer gameSerializer = new FileSerializer();
         AnimalModelling animalModel = new AnimalModel();
         MealModelling mealModel = new MealModel();
         BehaviorModelling moodAdjuster = new MoodAdjuster();
         PlayController controller = (PlayController)loader.getController();
+        controller.setGameSerializer(gameSerializer);
         controller.setAnimalModel(animalModel);
         controller.setMealModel(mealModel);
         controller.setMoodAdjuster(moodAdjuster);
+        animalModel.setGameSerializer(gameSerializer);//temporary solution
+        moodAdjuster.setGameSerializer(gameSerializer);//temporary solution
+        
         		
         primaryStage.setTitle("Tamagochi");
         primaryStage.setResizable(false);

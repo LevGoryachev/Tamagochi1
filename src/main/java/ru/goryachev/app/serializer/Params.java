@@ -25,4 +25,12 @@ public class Params implements Serializable {
     public long getTimePoint() {
         return timePoint;
     }
+
+	public void changeParameters(int animalNo, int mood, long timePoint) {
+		this.animalNo = animalNo;
+		this.mood = mood;
+		this.timePoint = timePoint;
+	}
+    
+    
 }

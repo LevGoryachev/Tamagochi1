@@ -8,7 +8,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import ru.goryachev.app.animalmodel.AnimalAnimator;
 import ru.goryachev.app.scene.SceneSwitcher;
+import ru.goryachev.app.serializer.Params;
 import ru.goryachev.app.serializer.Saver;
+import ru.goryachev.app.serializer.Serializer;
 
 import java.io.IOException;
 
@@ -24,7 +26,10 @@ public class MoodAdjuster implements BehaviorModelling {
     private SceneSwitcher scSwitcher;
     private long timeEat;
     
-    private Saver saver = new Saver();
+    //private Saver saver = new Saver();
+    
+    private Serializer gameSerializer;
+    private Params params = new Params(0, 0, 0);
     
     private static final long STARTDELAY = 10000;
     private static final long DELAY = 3600000;
@@ -42,7 +47,10 @@ public class MoodAdjuster implements BehaviorModelling {
             paneNodeAnim.getChildren().add(animalAnimator);
 
             //rewrite current params (file: condition.bin)
-            saver.writeState(animalNumber, mood, timePoint);
+            	//saver.writeState(animalNumber, mood, timePoint);
+            	//Params params = new Params(animalNumber, mood, timePoint);
+            this.params.changeParameters(animalNumber, mood, timePoint); //temporary solution
+            gameSerializer.writeState(params);
         }
     }
     
@@ -53,7 +61,7 @@ public class MoodAdjuster implements BehaviorModelling {
         if (this.mood >= 660) {
 
             //rewrite params with default (file: condition.bin)
-            saver.dropState();
+        	gameSerializer.dropState();
 
             timer.stop();
             scSwitcher.sceneReset(choiceReset);
@@ -67,7 +75,8 @@ public class MoodAdjuster implements BehaviorModelling {
             paneNodeAnim.getChildren().add(imgDead);
 
             //rewrite current params (file: condition.bin)
-            saver.writeState(animalNumber, mood, timePoint);
+            this.params.changeParameters(animalNumber, mood, timePoint); //temporary solution
+            gameSerializer.writeState(params);
             System.out.println("440-660 FALLING AND SAVING");
         }
 
@@ -77,7 +86,8 @@ public class MoodAdjuster implements BehaviorModelling {
             paneNodeAnim.getChildren().add(animal);
 
             //rewrite current params (file: condition.bin)
-            saver.writeState(animalNumber, mood, timePoint);
+            this.params.changeParameters(animalNumber, mood, timePoint); //temporary solution
+            gameSerializer.writeState(params);
             System.out.println("0-440 DECREASING AND SAVING");
         }
     }
@@ -159,6 +169,10 @@ public class MoodAdjuster implements BehaviorModelling {
     public ImageView getImagV() {
         return imagV;
     }
+    
+    public void setGameSerializer(Serializer gameSerializer) {
+		this.gameSerializer = gameSerializer;
+	}
     
     @Override
 	public void setTimePoint(long timePoint) {

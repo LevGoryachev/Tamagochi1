@@ -12,8 +12,10 @@ import ru.goryachev.app.behaviormodel.BehaviorModelling;
 import ru.goryachev.app.behaviormodel.GameAnimator;
 import ru.goryachev.app.mealmodel.MealModelling;
 import ru.goryachev.app.scene.SceneSwitcher;
+import ru.goryachev.app.serializer.FileSerializer;
 import ru.goryachev.app.serializer.Recover;
 import ru.goryachev.app.serializer.Saver;
+import ru.goryachev.app.serializer.Serializer;
 
 import java.io.*;
 import java.net.URL;
@@ -69,6 +71,7 @@ public class PlayController implements Serializable, Initializable {
         
     //@FXML
     //private Label startLabel; 
+    private Serializer gameSerializer;
     private AnimalModelling animalModel;
     private MealModelling mealModel;
     private BehaviorModelling moodAdjuster;
@@ -84,7 +87,7 @@ public class PlayController implements Serializable, Initializable {
         
     SceneSwitcher scSwitcher = new SceneSwitcher();
     
-    Saver saver = new Saver();
+    //Saver saver = new Saver();
     
     private void changeBtnsForPlayField () {
 
@@ -218,13 +221,17 @@ public class PlayController implements Serializable, Initializable {
     @FXML
     private void resetGame() throws IOException {
     	
-    	saver.dropState();
+    	gameSerializer.dropState();
     	
         SceneSwitcher scSwitcher = new SceneSwitcher();
         scSwitcher.sceneReset(choiceReset);
     }
- 
-    public void setAnimalModel(AnimalModelling animalModel) {
+       
+    public void setGameSerializer(Serializer gameSerializer) {
+		this.gameSerializer = gameSerializer;
+	}
+
+	public void setAnimalModel(AnimalModelling animalModel) {
 		this.animalModel = animalModel;
 	}
     
@@ -248,10 +255,10 @@ public class PlayController implements Serializable, Initializable {
 	    public void initialize(URL url, ResourceBundle resourceBundle) {
 	    	
 	        try {
-	            Recover recover = new Recover();
-	            this.animalNumber = recover.readState().getAnimalNo();
-	            this.mood = recover.readState().getMood();
-	            this.timePoint = recover.readState().getTimePoint();
+	        	Serializer tempSerializer = new FileSerializer();//temporary solution
+	        	this.animalNumber = tempSerializer.readState().getAnimalNo();
+	            this.mood = tempSerializer.readState().getMood();
+	            this.timePoint = tempSerializer.readState().getTimePoint();
 
 	        } catch (IOException e) {
 	            e.printStackTrace();

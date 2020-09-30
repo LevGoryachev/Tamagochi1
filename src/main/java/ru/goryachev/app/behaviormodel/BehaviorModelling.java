@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import ru.goryachev.app.scene.SceneSwitcher;
+import ru.goryachev.app.serializer.Serializer;
 
 public interface BehaviorModelling {
 
@@ -26,6 +27,8 @@ public interface BehaviorModelling {
     public int getMood();
 
     public ImageView getImagV();
+    
+    public void setGameSerializer(Serializer gameSerializer);
     
 	public void setTimePoint(long timePoint);
 	

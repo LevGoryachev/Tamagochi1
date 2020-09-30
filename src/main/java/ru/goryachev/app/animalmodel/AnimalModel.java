@@ -3,7 +3,9 @@ package ru.goryachev.app.animalmodel;
 import java.io.IOException;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import ru.goryachev.app.serializer.Params;
 import ru.goryachev.app.serializer.Saver;
+import ru.goryachev.app.serializer.Serializer;
 
 public class AnimalModel implements AnimalModelling {
 	
@@ -15,7 +17,9 @@ public class AnimalModel implements AnimalModelling {
     private long timePoint;
     private int mealChosen;
     
-    private Saver saver = new Saver();
+    //private Saver saver = new Saver();
+    
+    private Serializer gameSerializer;
         
 	public void createAnimal (int animalNumber) throws IOException {
 								 
@@ -47,9 +51,15 @@ public class AnimalModel implements AnimalModelling {
 		this.animalAnimator = new AnimalAnimator(imagV, mood);
 		if (this.timePoint == 0) {		//temporary solution for bug
             this.timePoint = System.currentTimeMillis();
-            saver.writeState(animalNumber, mood, timePoint);
+            //saver.writeState(animalNumber, mood, timePoint);
+            Params params = new Params(animalNumber, mood, timePoint);
+            gameSerializer.writeState(params);
 		}
  	}
+	
+	public void setGameSerializer(Serializer gameSerializer) {
+			this.gameSerializer = gameSerializer;
+	}
 		
 	public void setMood(int mood) {
 		this.mood = mood;
