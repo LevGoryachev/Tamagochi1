@@ -1,6 +1,10 @@
 /.idea/
 /build/
-/.idea/
-/build/
 /.gradle/
+/.externalToolBuilders/
+/bin/
 condition.bin
+*.settings
+*.classpath
+*.project
+*.iml
