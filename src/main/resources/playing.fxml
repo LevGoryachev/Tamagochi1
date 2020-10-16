@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox fx:id="mainScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.goryachev.app.controller.PlayController">
+   <children>
+      <AnchorPane prefHeight="425.0" prefWidth="800.0">
+         <children>
+            <Pane fx:id="paneNodeAnim" layoutX="264.0" layoutY="58.0" prefHeight="100.0" prefWidth="100.0" />
+            <Pane fx:id="paneNodeApple" layoutX="200.0" layoutY="300.0" prefHeight="100.0" prefWidth="100.0" />
+            <Pane fx:id="paneNodeSeaweed" layoutX="375.0" layoutY="300.0" prefHeight="100.0" prefWidth="100.0" />
+            <Pane fx:id="paneNodeSausage" layoutX="575.0" layoutY="300.0" prefHeight="100.0" prefWidth="100.0" />
+            <!--<TextField fx:id="userTxt" layoutX="300.0" layoutY="300.0"/>-->
+           	<!--<Label fx:id="startLabel" layoutX="300.0" layoutY="300.0" text="Hello! Please pick a pet" minHeight="16" minWidth="69" />-->
+            
+         </children>
+      </AnchorPane>
+      <HBox prefHeight="50.0" prefWidth="800.0">
+         <AnchorPane prefHeight="30.0" prefWidth="800.0">
+            <children>
+               <Button fx:id="pickHedgehog" layoutX="150.0" layoutY="2.0" mnemonicParsing="false" onAction="#startHedgehog" prefHeight="25.0" prefWidth="75.0" text="Hedgehog" />
+               <Button fx:id="pickCat" layoutX="300.0" layoutY="2.0" mnemonicParsing="false" onAction="#startCat" prefHeight="25.0" prefWidth="75.0" text="Cat" />
+               <Button fx:id="pickTurtle" layoutX="450.0" layoutY="2.0" mnemonicParsing="false" onAction="#startTurtle" prefHeight="25.0" prefWidth="75.0" text="Turtle" />
+               <Button fx:id="pickDog" layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onAction="#startDog" prefHeight="25.0" prefWidth="75.0" text="Dog" />
+               <Button fx:id="playFun" layoutX="125.0" layoutY="2.0" mnemonicParsing="false" onAction="#playing" prefHeight="25.0" prefWidth="75.0" text="Play" visible="false" />
+               <Button fx:id="feedWApple" layoutX="300.0" layoutY="2.0" mnemonicParsing="false" onAction="#apple" prefHeight="25.0" prefWidth="75.0" text="Apple" visible="false" />
+               <Button fx:id="feedWSeaweed" layoutX="475.0" layoutY="2.0" mnemonicParsing="false" onAction="#seaweed" prefHeight="25.0" prefWidth="75.0" text="Seaweed" visible="false" />
+               <Button fx:id="feedWSausage" layoutX="650.0" layoutY="2.0" mnemonicParsing="false" onAction="#sausage" prefHeight="25.0" prefWidth="75.0" text="Sausage" visible="false" />
+               <Button fx:id="choiceContinue" layoutX="362.0" layoutY="-250.0" mnemonicParsing="false" onAction="#continueGame" prefHeight="25.0" prefWidth="75.0" text="Continue" visible="false" />
+               <Button fx:id="choiceReset" layoutX="362.0" layoutY="-200.0" mnemonicParsing="false" onAction="#resetGame" prefHeight="25.0" prefWidth="75.0" text="Reset" visible="false" />
+               
+               <Button fx:id="resetBtn" layoutX="50.0" layoutY="2.0" mnemonicParsing="false" onAction="#resetGame" prefHeight="25.0" prefWidth="75.0" text="reset" visible="false" />
+            </children>
+         </AnchorPane>
+      </HBox>
+   </children>
+</VBox>
